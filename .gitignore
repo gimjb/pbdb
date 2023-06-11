@@ -1,6 +1,9 @@
 # macOS
 .DS_Store
 
+# Secrets
+.env
+
 # Yarn
 .yarn/*
 !.yarn/patches
