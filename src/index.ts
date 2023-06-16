@@ -2,6 +2,8 @@ import discord from 'discord.js'
 import 'dotenv/config'
 import config from './config'
 
+import commands from './commands'
+
 const client = new discord.Client({
   intents: ['Guilds']
 })
@@ -14,4 +16,16 @@ client.on('guildCreate', async guild => {
   member.setNickname(config.nickname)
 })
 
-client.login(process.env['DISCORD_TOKEN'])
+const token = process.env['DISCORD_TOKEN']
+
+client.on('ready', async readyClient => {
+  commands.register(readyClient)
+})
+
+client.on('interactionCreate', async interaction => {
+  if (!interaction.isCommand()) return
+
+  commands.handle(interaction)
+})
+
+client.login()
