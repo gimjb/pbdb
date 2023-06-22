@@ -15,8 +15,6 @@ client.on('guildCreate', async guild => {
   member.setNickname(config.nickname)
 })
 
-const token = process.env['DISCORD_TOKEN']
-
 client.on('ready', async readyClient => {
   commands.register(readyClient)
 })
