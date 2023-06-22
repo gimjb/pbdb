@@ -1,8 +1,7 @@
 import discord from 'discord.js'
 import 'dotenv/config'
-import config from './config'
-
 import commands from './commands'
+import config from './config'
 
 const client = new discord.Client({
   intents: ['Guilds']
