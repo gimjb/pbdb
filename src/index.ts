@@ -1,8 +1,19 @@
 import discord from 'discord.js'
+import mongoose from 'mongoose'
 import 'dotenv/config'
 import commands from './commands'
 import config from './config'
 import bible from './bible'
+
+mongoose
+  .connect(process.env['MONGO_URI'] ?? 'mongodb://127.0.0.1:27017/test')
+  .then(() => {
+    console.log('Connected to MongoDB.')
+  })
+  .catch(error => {
+    console.error(error)
+    process.exit(1)
+  })
 
 const client = new discord.Client({
   intents: ['Guilds', 'GuildMessages', 'MessageContent']
