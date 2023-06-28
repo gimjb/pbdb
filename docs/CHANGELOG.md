@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+---
+
+## [0.3.0]
+
 ### Added
 
 - Add color to verse embeds: red for Jesus; otherwise Discord blurple.
@@ -40,5 +44,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bot goes online.
 
 [unreleased]: https://github.com/gimjb/pbdb/compare/latest...HEAD
+[0.3.0]: https://github.com/gimjb/pbdb/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/gimjb/pbdb/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/gimjb/pbdb/compare/v0.0.0...v0.1.0
