@@ -28,7 +28,9 @@ describe('quote one referenced verse', () => {
       embeds: [
         {
           title: expectedCitation,
-          description: expectedVerse
+          description: expectedVerse,
+          // Red: Jesus is speaking.
+          color: 0xed4245
         }
       ]
     })
@@ -39,7 +41,9 @@ describe('quote one referenced verse', () => {
       embeds: [
         {
           title: expectedCitation,
-          description: `${expectedVerse}`
+          description: `${expectedVerse}`,
+          // Red: Jesus is speaking.
+          color: 0xed4245
         }
       ]
     })
@@ -48,27 +52,26 @@ describe('quote one referenced verse', () => {
 
 describe('quote multiple verses', () => {
   const ref = new BibleReference({
-    book: 'John',
-    chapter: 3,
-    versesStart: 16,
-    versesEnd: 18
+    book: 'Ephesians',
+    chapter: 1,
+    versesStart: 4,
+    versesEnd: 5
   })
-  const expectedCitation = 'John 3:16–18 (KJV)'
+  const expectedCitation = 'Ephesians 1:4–5 (KJV)'
   const expectedVerses = [
-    '**For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.**',
-    '**For God sent not his Son into the world to condemn the world; but that the world through him might be saved.**',
-    '**He that believeth on him is not condemned: but he that believeth not is condemned already, because he hath not believed in the name of the only begotten Son of God.**'
+    'According as he hath chosen us in him before the foundation of the world, that we should be holy and without blame before him in love:',
+    'Having predestinated us unto the adoption of children by Jesus Christ to himself, according to the good pleasure of his will,'
   ]
 
   test('blockquote; inline', () => {
     expect(ref.quote({ form: 'blockquote', inline: true }).content).toBe(
-      `> ${expectedVerses[0]} ¹⁷ ${expectedVerses[1]} ¹⁸ ${expectedVerses[2]}\n> — ${expectedCitation}`
+      `> ${expectedVerses[0]} ⁵ ${expectedVerses[1]}\n> — ${expectedCitation}`
     )
   })
 
   test('blockquote; not inline', () => {
     expect(ref.quote({ form: 'blockquote', inline: false }).content).toBe(
-      `> 16. ${expectedVerses[0]}\n> 17. ${expectedVerses[1]}\n> 18. ${expectedVerses[2]}\n> — ${expectedCitation}`
+      `> 4. ${expectedVerses[0]}\n> 5. ${expectedVerses[1]}\n> — ${expectedCitation}`
     )
   })
 
@@ -77,7 +80,9 @@ describe('quote multiple verses', () => {
       embeds: [
         {
           title: expectedCitation,
-          description: `${expectedVerses[0]} ¹⁷ ${expectedVerses[1]} ¹⁸ ${expectedVerses[2]}`
+          description: `${expectedVerses[0]} ⁵ ${expectedVerses[1]}`,
+          // Blurple: Jesus is not speaking.
+          color: 0x5865f2
         }
       ]
     })
@@ -88,7 +93,9 @@ describe('quote multiple verses', () => {
       embeds: [
         {
           title: expectedCitation,
-          description: `16. ${expectedVerses[0]}\n17. ${expectedVerses[1]}\n18. ${expectedVerses[2]}`
+          description: `4. ${expectedVerses[0]}\n5. ${expectedVerses[1]}`,
+          // Blurple: Jesus is not speaking.
+          color: 0x5865f2
         }
       ]
     })

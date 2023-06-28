@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Add color to verse embeds: red for Jesus; otherwise Discord blurple.
 - Horizontal rulers in Discord Markdown (work-around).
 
 ### Fixed

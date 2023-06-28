@@ -70,6 +70,8 @@ export default class BibleReference implements BibleReferenceOptions {
       messageContent += verse
     }
 
+    messageContent = messageContent.trim()
+
     switch (form) {
       case 'blockquote':
         return {
@@ -82,7 +84,8 @@ export default class BibleReference implements BibleReferenceOptions {
           embeds: [
             {
               title: this.citation,
-              description: messageContent
+              description: messageContent,
+              color: messageContent.includes('**') ? 0xed4245 : 0x5865f2
             }
           ]
         }
