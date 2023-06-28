@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Horizontal rulers in Discord Markdown (work-around).
 
+### Fixed
+
+- Capitalize release notes in this file.
+
 ## [0.2.0]: 2023-06-28
 
 ---
@@ -23,8 +27,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `/privacy` command to show privacy policy.
 - `/terms` command to show terms of service.
 - `/settings` to configure the bot.
-- set nickname to `PBDB` when joining a server.
-- post Bible verses referenced in messages.
+- Set nickname to `PBDB` when joining a server.
+- Post Bible verses referenced in messages.
 
 ---
 
@@ -32,7 +36,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- bot goes online.
+- Bot goes online.
 
 [unreleased]: https://github.com/gimjb/pbdb/compare/latest...HEAD
 [0.2.0]: https://github.com/gimjb/pbdb/compare/v0.1.0...v0.2.0
