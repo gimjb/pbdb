@@ -6,8 +6,7 @@ import toDiscordMarkdown from '../utils/toDiscordMarkdown'
 
 function processChangelog(changelog: string) {
   return (
-    '> ' +
-    toDiscordMarkdown(changelog).trim().replace(/\n/g, '\n> ') +
+    toDiscordMarkdown(changelog).trim() +
     // Add a link to the changelog in the Git repository.
     '\n\nThis changelog can also be found in the official [GitHub repository](' +
     `${config.officialRepository}/blob/master/docs/CHANGELOG.md).`
@@ -25,7 +24,11 @@ const command: ApplicationCommand = {
   },
   execute: async interaction => {
     await interaction.reply({
-      content: changelog,
+      embeds: [
+        {
+          description: changelog
+        }
+      ],
       ephemeral: true
     })
   }
