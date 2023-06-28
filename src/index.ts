@@ -1,9 +1,9 @@
 import discord from 'discord.js'
-import mongoose from 'mongoose'
 import 'dotenv/config'
+import mongoose from 'mongoose'
+import bible from './bible'
 import commands from './commands'
 import config from './config'
-import bible from './bible'
 import usersController from './controllers/users'
 
 mongoose

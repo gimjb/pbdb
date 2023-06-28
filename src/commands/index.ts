@@ -1,6 +1,6 @@
 import fs from 'fs'
 import discord from 'discord.js'
-import type { CommandMetadata, CommandLogic } from './ApplicationCommand'
+import type { CommandLogic, CommandMetadata } from './ApplicationCommand'
 
 const commandsMetadata: CommandMetadata[] = []
 const commandsLogic: Record<string, CommandLogic> = {}
