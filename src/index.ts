@@ -1,7 +1,20 @@
 import discord from 'discord.js'
+import mongoose from 'mongoose'
 import 'dotenv/config'
+import commands from './commands'
 import config from './config'
 import bible from './bible'
+import usersController from './controllers/users'
+
+mongoose
+  .connect(process.env['MONGO_URI'] ?? 'mongodb://localhost:27017/pbdb')
+  .then(() => {
+    console.log('Connected to MongoDB.')
+  })
+  .catch(error => {
+    console.error(error)
+    process.exit(1)
+  })
 
 const client = new discord.Client({
   intents: ['Guilds', 'GuildMessages', 'MessageContent']
@@ -22,13 +35,28 @@ client.on('messageCreate', async message => {
 
   if (references.length === 0) return
 
-  const promises = references.map(reference => {
+  const promises = references.map(async reference => {
+    const user = await usersController.get(message.author.id)
+
     return message.channel.send(
-      reference.quote({ form: 'embed', inline: false })
+      reference.quote({
+        form: user.preferences.verseDisplay ?? 'embed',
+        inline: user.preferences.inlineVerses ?? false
+      })
     )
   })
 
   await Promise.all(promises)
+})
+
+client.on('ready', async readyClient => {
+  commands.register(readyClient)
+})
+
+client.on('interactionCreate', async interaction => {
+  if (!interaction.isCommand()) return
+
+  commands.handle(interaction)
 })
 
 client.login(process.env['DISCORD_TOKEN'])
