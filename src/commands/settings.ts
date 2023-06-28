@@ -1,4 +1,4 @@
-import discord, { StringSelectMenuBuilder } from 'discord.js'
+import discord from 'discord.js'
 import type ApplicationCommand from './ApplicationCommand'
 import usersController from '../controllers/users'
 
