@@ -1,9 +1,9 @@
 import discord, { StringSelectMenuBuilder } from 'discord.js'
 import type ApplicationCommand from './ApplicationCommand'
-import userController from '../controllers/users'
+import usersController from '../controllers/users'
 
 async function createInteractionReply(userId: string) {
-  const user = await userController.get(userId)
+  const user = await usersController.get(userId)
 
   return {
     content: 'Configure the bot with the options below.',
@@ -41,7 +41,7 @@ async function awaitMessageComponent(
   userId: string,
   response: discord.InteractionResponse
 ) {
-  const user = await userController.get(userId)
+  const user = await usersController.get(userId)
 
   await response
 

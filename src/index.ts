@@ -4,7 +4,7 @@ import 'dotenv/config'
 import commands from './commands'
 import config from './config'
 import bible from './bible'
-import userController from './controllers/users'
+import usersController from './controllers/users'
 
 mongoose
   .connect(process.env['MONGO_URI'] ?? 'mongodb://localhost:27017/pbdb')
@@ -36,7 +36,7 @@ client.on('messageCreate', async message => {
   if (references.length === 0) return
 
   const promises = references.map(async reference => {
-    const user = await userController.get(message.author.id)
+    const user = await usersController.get(message.author.id)
 
     return message.channel.send(
       reference.quote({
