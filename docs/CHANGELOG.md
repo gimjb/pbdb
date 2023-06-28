@@ -9,9 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0]: 2023-06-28
+
 ### Added
 
 - `/changelog` command to show this file.
+- `/privacy` command to show privacy policy.
+- `/terms` command to show terms of service.
 - `/settings` to configure the bot.
 - set nickname to `PBDB` when joining a server.
 - post Bible verses referenced in messages.
@@ -25,4 +29,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - bot goes online.
 
 [unreleased]: https://github.com/gimjb/pbdb/compare/latest...HEAD
+[0.2.0]: https://github.com/gimjb/pbdb/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/gimjb/pbdb/compare/v0.0.0...v0.1.0
