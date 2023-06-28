@@ -4,6 +4,8 @@ export default function toDiscordMarkdown(text: string) {
       // Remove links that are not supported in Discord Markdown.
       .replace(/\[.+?]: http.+\n/g, '')
       .replace(/\[(?<linkText>.+?)](?!\()/g, '$<linkText>')
+      // `mailto:` links are not supported in Discord Markdown.
+      .replace(/\<(?<linkText>.+?@.+?\..+?)\>/g, '$<linkText>')
       // Horizontal rules
       .replace(/^-{3,}/g, '—')
       // Unwrap wrapped lines.
