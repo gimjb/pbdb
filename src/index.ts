@@ -4,9 +4,10 @@ import 'dotenv/config'
 import commands from './commands'
 import config from './config'
 import bible from './bible'
+import userController from './controllers/users'
 
 mongoose
-  .connect(process.env['MONGO_URI'] ?? 'mongodb://127.0.0.1:27017/test')
+  .connect(process.env['MONGO_URI'] ?? 'mongodb://localhost:27017/pbdb')
   .then(() => {
     console.log('Connected to MongoDB.')
   })
@@ -34,9 +35,14 @@ client.on('messageCreate', async message => {
 
   if (references.length === 0) return
 
-  const promises = references.map(reference => {
+  const promises = references.map(async reference => {
+    const user = await userController.get(message.author.id)
+
     return message.channel.send(
-      reference.quote({ form: 'embed', inline: false })
+      reference.quote({
+        form: user.preferences.verseDisplay ?? 'embed',
+        inline: user.preferences.inlineVerses ?? false
+      })
     )
   })
 
