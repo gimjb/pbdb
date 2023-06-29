@@ -12,6 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Display version in presence activity/status.
+- Post multiple verse embeds in a single message. This optimizes the bot’s
+  response time.
 
 ---
 

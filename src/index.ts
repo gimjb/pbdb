@@ -27,6 +27,40 @@ const client = new discord.Client({
   }
 })
 
+client.on('guildCreate', async guild => {
+  const member = guild.members.cache.get(client.user?.id ?? '')
+
+  if (typeof member === 'undefined') return
+
+  member.setNickname(config.nickname)
+})
+
+function packMessageEmbeds(
+  messages: discord.MessageCreateOptions[]
+): discord.MessageCreateOptions[] {
+  const packedMessages: discord.MessageCreateOptions[] = [
+    {
+      embeds: []
+    }
+  ]
+
+  for (const message of messages) {
+    if (message.embeds?.length === 0 || typeof message.embeds === 'undefined') {
+      continue
+    }
+
+    if (packedMessages[packedMessages.length - 1]!.embeds!.length === 10) {
+      packedMessages.push({
+        embeds: []
+      })
+    }
+
+    packedMessages[packedMessages.length - 1]!.embeds!.push(message.embeds![0]!)
+  }
+
+  return packedMessages
+}
+
 client.on('messageCreate', async message => {
   if (message.author.bot) return
 
@@ -34,21 +68,28 @@ client.on('messageCreate', async message => {
 
   if (referenceMatches.length === 0) return
 
-  const promises = referenceMatches.map(async ({ reference }) => {
-    const user = await usersController.get(message.author.id)
+  const { verseDisplay, inlineVerses } = (
+    await usersController.get(message.author.id)
+  ).preferences
 
-    return message.channel
-      .send(
-        reference.quote({
-          form: user.preferences.verseDisplay ?? 'embed',
-          inline: user.preferences.inlineVerses ?? false
-        })
-      )
-      .catch(error => {
-        // A common error is insufficient permissions to send embeds.
-        // Todo(gimjb): try to send a blockquote instead of an embed.
-        console.error(error)
+  let messagesToSend: discord.MessageCreateOptions[] = referenceMatches.map(
+    referenceMatch =>
+      referenceMatch.reference.quote({
+        form: verseDisplay ?? 'embed',
+        inline: inlineVerses ?? false
       })
+  )
+
+  if (verseDisplay === 'embed') {
+    messagesToSend = packMessageEmbeds(messagesToSend)
+  }
+
+  const promises = messagesToSend.map(async messageToSend => {
+    return message.channel.send(messageToSend).catch(error => {
+      // A common error is insufficient permissions to send embeds.
+      // Todo(gimjb): try to send a blockquote instead of an embed.
+      console.error(error)
+    })
   })
 
   await Promise.all(promises)
