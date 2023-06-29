@@ -270,8 +270,12 @@ function createBookNameRegex() {
 
 const referenceRegex = createBookNameRegex()
 
-export default function extractReferences(text: string): BibleReference[] {
-  const references: BibleReference[] = []
+interface BibleReferenceMatch {
+  index: number
+  reference: BibleReference
+}
+export default function extractReferences(text: string): BibleReferenceMatch[] {
+  const references: BibleReferenceMatch[] = []
 
   for (const match of text.matchAll(referenceRegex)) {
     if (
@@ -292,8 +296,9 @@ export default function extractReferences(text: string): BibleReference[] {
     }
 
     try {
-      references.push(
-        new BibleReference({
+      references.push({
+        index: match.index ?? 0,
+        reference: new BibleReference({
           book: bookName,
           chapter: parseInt(match.groups['chapter']),
           versesStart: parseInt(match.groups['versesStart']),
@@ -301,11 +306,13 @@ export default function extractReferences(text: string): BibleReference[] {
             match.groups['versesEnd'] ?? match.groups['versesStart']
           )
         })
-      )
+      })
     } catch (e) {
       console.error(e)
     }
   }
+
+  references.sort((a, b) => a.index - b.index)
 
   return references
 }

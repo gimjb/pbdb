@@ -31,11 +31,11 @@ client.on('guildCreate', async guild => {
 client.on('messageCreate', async message => {
   if (message.author.bot) return
 
-  const references = bible.extractReferences(message.content)
+  const referenceMatches = bible.extractReferences(message.content)
 
-  if (references.length === 0) return
+  if (referenceMatches.length === 0) return
 
-  const promises = references.map(async reference => {
+  const promises = referenceMatches.map(async ({ reference }) => {
     const user = await usersController.get(message.author.id)
 
     return message.channel
