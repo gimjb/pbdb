@@ -38,12 +38,18 @@ client.on('messageCreate', async message => {
   const promises = references.map(async reference => {
     const user = await usersController.get(message.author.id)
 
-    return message.channel.send(
-      reference.quote({
-        form: user.preferences.verseDisplay ?? 'embed',
-        inline: user.preferences.inlineVerses ?? false
+    return message.channel
+      .send(
+        reference.quote({
+          form: user.preferences.verseDisplay ?? 'embed',
+          inline: user.preferences.inlineVerses ?? false
+        })
+      )
+      .catch(error => {
+        // A common error is insufficient permissions to send embeds.
+        // Todo(gimjb): try to send a blockquote instead of an embed.
+        console.error(error)
       })
-    )
   })
 
   await Promise.all(promises)
