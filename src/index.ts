@@ -17,15 +17,14 @@ mongoose
   })
 
 const client = new discord.Client({
-  intents: ['Guilds', 'GuildMessages', 'MessageContent']
-})
-
-client.on('guildCreate', async guild => {
-  const member = guild.members.cache.get(client.user?.id ?? '')
-
-  if (typeof member === 'undefined') return
-
-  member.setNickname(config.nickname)
+  intents: ['Guilds', 'GuildMessages', 'MessageContent'],
+  presence: {
+    activities: [
+      {
+        name: `v${process.env['npm_package_version'] ?? '?.?.?'}`
+      }
+    ]
+  }
 })
 
 client.on('messageCreate', async message => {

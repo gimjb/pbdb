@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [Unreleased]
+
+### Added
+
+- Display version in presence activity/status.
+
+---
+
 ## [0.3.3]: 2023-06-29
 
 ### Fixed
