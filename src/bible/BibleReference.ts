@@ -51,6 +51,18 @@ export default class BibleReference implements BibleReferenceOptions {
         ? this.versesStart
         : `${this.versesStart}–${this.versesEnd}`) +
       ' (KJV)'
+
+    if (this.chapter > kjv[this.book].length) {
+      throw new Error(`Chapter ${this.chapter} does not exist in ${this.book}.`)
+    } else if (this.versesStart > this.versesEnd) {
+      throw new Error(
+        `Verse ${this.versesStart} is after verse ${this.versesEnd}.`
+      )
+    } else if (this.versesStart > kjv[this.book][this.chapter - 1]!.length) {
+      throw new Error(
+        `Verse ${this.versesStart} does not exist in ${this.book} ${this.chapter}`
+      )
+    }
   }
 
   /** Returns a Discord message with the referenced verses. */

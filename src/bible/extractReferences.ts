@@ -291,16 +291,20 @@ export default function extractReferences(text: string): BibleReference[] {
       continue
     }
 
-    references.push(
-      new BibleReference({
-        book: bookName,
-        chapter: parseInt(match.groups['chapter']),
-        versesStart: parseInt(match.groups['versesStart']),
-        versesEnd: parseInt(
-          match.groups['versesEnd'] ?? match.groups['versesStart']
-        )
-      })
-    )
+    try {
+      references.push(
+        new BibleReference({
+          book: bookName,
+          chapter: parseInt(match.groups['chapter']),
+          versesStart: parseInt(match.groups['versesStart']),
+          versesEnd: parseInt(
+            match.groups['versesEnd'] ?? match.groups['versesStart']
+          )
+        })
+      )
+    } catch (e) {
+      console.error(e)
+    }
   }
 
   return references
