@@ -7,7 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [Unreleased]
+## [0.3.2]: 2023-06-29
+
+### Fixed
+
+- Fix horizontal rulers sometimes not showing up.
 
 ---
 
@@ -31,9 +35,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Capitalize release notes in this file.
 
-## [0.2.0]: 2023-06-28
-
 ---
+
+## [0.2.0]: 2023-06-28
 
 ### Added
 
