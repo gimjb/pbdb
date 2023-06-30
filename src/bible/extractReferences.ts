@@ -263,7 +263,7 @@ function createBookNameRegex() {
       .replace(
         ' ',
         '\\s*'
-      )})\\s*(?<chapter>\\d{1,3}):(?<versesStart>\\d{1,3})(?:[-–—](?<versesEnd>\\d{1,3}))?`,
+      )})\\s*(?<chapter>\\d{1,3}):(?<versesStart>\\d{1,3})(?:(?:[-–—](?<versesEnd>\\d{1,3}))|(?<onwards>[-–—]))?`,
     'gi'
   )
 }
@@ -296,15 +296,23 @@ export default function extractReferences(text: string): BibleReference[] {
     }
 
     try {
+      let versesEnd
+
+      if (match.groups['versesEnd']) {
+        versesEnd = parseInt(match.groups['versesEnd'])
+      } else if (match.groups['onwards']) {
+        versesEnd = 999
+      } else {
+        versesEnd = parseInt(match.groups['versesStart'])
+      }
+
       referenceMatches.push({
         index: match.index ?? 0,
         reference: new BibleReference({
           book: bookName,
           chapter: parseInt(match.groups['chapter']),
           versesStart: parseInt(match.groups['versesStart']),
-          versesEnd: parseInt(
-            match.groups['versesEnd'] ?? match.groups['versesStart']
-          )
+          versesEnd
         })
       })
     } catch (e) {

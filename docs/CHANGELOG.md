@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Ability to post from one verse onwards. For example, `Romans 5:20–` will post
+  from Romans 5:20 to the end of the chapter (i.e., `Romans 5:20–21`).
+
 ### Fixed
 
 - Cap the last verse of a range to the number of verses in a chapter.
