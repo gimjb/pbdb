@@ -1,4 +1,5 @@
 const BibleReference = require('./BibleReference').default
+const config = require('../config').default
 
 describe('quote one referenced verse', () => {
   const ref = new BibleReference({
@@ -29,8 +30,7 @@ describe('quote one referenced verse', () => {
         {
           title: expectedCitation,
           description: expectedVerse,
-          // Red: Jesus is speaking.
-          color: 0xed4245
+          color: config.jesusColor
         }
       ]
     })
@@ -42,8 +42,7 @@ describe('quote one referenced verse', () => {
         {
           title: expectedCitation,
           description: `${expectedVerse}`,
-          // Red: Jesus is speaking.
-          color: 0xed4245
+          color: config.jesusColor
         }
       ]
     })
@@ -81,8 +80,7 @@ describe('quote multiple verses', () => {
         {
           title: expectedCitation,
           description: `${expectedVerses[0]} ⁵ ${expectedVerses[1]}`,
-          // Blurple: Jesus is not speaking.
-          color: 0x5865f2
+          color: config.nonJesusColor
         }
       ]
     })
@@ -94,8 +92,7 @@ describe('quote multiple verses', () => {
         {
           title: expectedCitation,
           description: `4. ${expectedVerses[0]}\n5. ${expectedVerses[1]}`,
-          // Blurple: Jesus is not speaking.
-          color: 0x5865f2
+          color: config.nonJesusColor
         }
       ]
     })

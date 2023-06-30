@@ -1,5 +1,6 @@
 import discord from 'discord.js'
 import type BibleBookName from './BibleBookName'
+import config from '../config'
 import kjvImport from './kjv.json'
 
 const kjv = kjvImport as Record<BibleBookName, string[][]>
@@ -97,7 +98,9 @@ export default class BibleReference implements BibleReferenceOptions {
             {
               title: this.citation,
               description: messageContent,
-              color: messageContent.includes('**') ? 0xed4245 : 0x5865f2
+              color: messageContent.includes('**')
+                ? config.jesusColor
+                : config.nonJesusColor
             }
           ]
         }
