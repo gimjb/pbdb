@@ -300,6 +300,7 @@ export default function extractReferences(text: string): BibleReference[] {
       if (match.groups['versesEnd']) {
         versesEnd = parseInt(match.groups['versesEnd'])
       } else if (match.groups['onwards']) {
+        // `999` will be capted to the last verse of the chapter.
         versesEnd = 999
       } else {
         versesEnd = parseInt(match.groups['versesStart'])
