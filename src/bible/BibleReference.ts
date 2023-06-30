@@ -42,28 +42,33 @@ export default class BibleReference implements BibleReferenceOptions {
   public readonly versesEnd: number
 
   constructor(options: BibleReferenceOptions) {
+    let versesStart = Math.min(options.versesStart, options.versesEnd)
+
+    if (options.chapter > kjv[options.book].length) {
+      throw new Error(
+        `Chapter ${options.chapter} does not exist in ${options.book}.`
+      )
+    } else if (
+      typeof kjv[options.book][options.chapter - 1]?.[versesStart - 1] ===
+      'undefined'
+    ) {
+      throw new Error(
+        `${options.book} ${options.chapter} only has ${
+          kjv[options.book][options.chapter - 1]?.length
+        } verses.`
+      )
+    }
+
     this.book = options.book
     this.chapter = options.chapter
-    this.versesStart = options.versesStart
-    this.versesEnd = options.versesEnd
+    this.versesStart = versesStart
+    this.versesEnd = Math.max(versesStart, Math.min(options.versesEnd, kjv[options.book][options.chapter - 1]!.length)]))
     this.citation =
       `${this.book} ${this.chapter}:` +
       (this.versesStart === this.versesEnd
         ? this.versesStart
         : `${this.versesStart}–${this.versesEnd}`) +
       ' (KJV)'
-
-    if (this.chapter > kjv[this.book].length) {
-      throw new Error(`Chapter ${this.chapter} does not exist in ${this.book}.`)
-    } else if (this.versesStart > this.versesEnd) {
-      throw new Error(
-        `Verse ${this.versesStart} is after verse ${this.versesEnd}.`
-      )
-    } else if (this.versesStart > kjv[this.book][this.chapter - 1]!.length) {
-      throw new Error(
-        `Verse ${this.versesStart} does not exist in ${this.book} ${this.chapter}`
-      )
-    }
   }
 
   /** Returns a Discord message with the referenced verses. */
