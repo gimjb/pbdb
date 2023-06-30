@@ -270,12 +270,11 @@ function createRegex() {
 
 const referenceRegex = createRegex()
 
-interface BibleReferenceMatch {
-  index: number
-  reference: BibleReference
-}
 export default function extractReferences(text: string): BibleReference[] {
-  const referenceMatches: BibleReferenceMatch[] = []
+  const referenceMatches: {
+    index: number
+    reference: BibleReference
+  }[] = []
 
   for (const match of text.matchAll(referenceRegex)) {
     if (
