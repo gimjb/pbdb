@@ -64,17 +64,17 @@ function packMessageEmbeds(
 client.on('messageCreate', async message => {
   if (message.author.bot) return
 
-  const referenceMatches = bible.extractReferences(message.content)
+  const references = bible.extractReferences(message.content)
 
-  if (referenceMatches.length === 0) return
+  if (references.length === 0) return
 
   const { verseDisplay, inlineVerses } = (
     await usersController.get(message.author.id)
   ).preferences
 
-  let messagesToSend: discord.MessageCreateOptions[] = referenceMatches.map(
-    referenceMatch =>
-      referenceMatch.reference.quote({
+  let messagesToSend: discord.MessageCreateOptions[] = references.map(
+    reference =>
+      reference.quote({
         form: verseDisplay ?? 'embed',
         inline: inlineVerses ?? false
       })

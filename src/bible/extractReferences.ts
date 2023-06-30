@@ -274,8 +274,8 @@ interface BibleReferenceMatch {
   index: number
   reference: BibleReference
 }
-export default function extractReferences(text: string): BibleReferenceMatch[] {
-  const references: BibleReferenceMatch[] = []
+export default function extractReferences(text: string): BibleReference[] {
+  const referenceMatches: BibleReferenceMatch[] = []
 
   for (const match of text.matchAll(referenceRegex)) {
     if (
@@ -296,7 +296,7 @@ export default function extractReferences(text: string): BibleReferenceMatch[] {
     }
 
     try {
-      references.push({
+      referenceMatches.push({
         index: match.index ?? 0,
         reference: new BibleReference({
           book: bookName,
@@ -312,7 +312,7 @@ export default function extractReferences(text: string): BibleReferenceMatch[] {
     }
   }
 
-  references.sort((a, b) => a.index - b.index)
-
-  return references
+  return referenceMatches
+    .sort((a, b) => a.index - b.index)
+    .map(referenceMatch => referenceMatch.reference)
 }
