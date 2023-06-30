@@ -35,32 +35,6 @@ client.on('guildCreate', async guild => {
   member.setNickname(config.nickname)
 })
 
-function packMessageEmbeds(
-  messages: discord.MessageCreateOptions[]
-): discord.MessageCreateOptions[] {
-  const packedMessages: discord.MessageCreateOptions[] = [
-    {
-      embeds: []
-    }
-  ]
-
-  for (const message of messages) {
-    if (message.embeds?.length === 0 || typeof message.embeds === 'undefined') {
-      continue
-    }
-
-    if (packedMessages[packedMessages.length - 1]!.embeds!.length === 10) {
-      packedMessages.push({
-        embeds: []
-      })
-    }
-
-    packedMessages[packedMessages.length - 1]!.embeds!.push(message.embeds![0]!)
-  }
-
-  return packedMessages
-}
-
 client.on('messageCreate', async message => {
   if (message.author.bot) return
 
@@ -72,17 +46,13 @@ client.on('messageCreate', async message => {
     await usersController.get(message.author.id)
   ).preferences
 
-  let messagesToSend: discord.MessageCreateOptions[] = references.map(
+  const messagesToSend: discord.MessageCreateOptions[] = references.flatMap(
     reference =>
       reference.quote({
         form: verseDisplay ?? 'embed',
         inline: inlineVerses ?? false
       })
   )
-
-  if (verseDisplay === 'embed') {
-    messagesToSend = packMessageEmbeds(messagesToSend)
-  }
 
   const promises = messagesToSend.map(async messageToSend => {
     return message.channel.send(messageToSend).catch(error => {

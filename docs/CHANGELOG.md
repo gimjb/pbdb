@@ -7,20 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [Unreleased]
+## [0.5.0]: 2023-06-30
 
 ### Added
 
 - Ability to post from one verse onwards. For example, `Romans 5:20–` will post
   from Romans 5:20 to the end of the chapter (i.e., `Romans 5:20–21`).
+- Split long messages into multiple messages. This is to avoid hitting the
+  Discord message character limit, which would prevent the bot from posting it.
 
 ### Fixed
 
 - Cap the last verse of a range to the number of verses in a chapter.
 
+### Removed
+
+- No longer packs message embeds into a single message. This is to avoid hitting
+  the Discord message character limit, which would prevent the bot from posting
+  it.
+
 ---
 
-## [0.4.0]
+## [0.4.0]: 2023-06-29
 
 ### Added
 
@@ -84,6 +92,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bot goes online.
 
 [unreleased]: https://github.com/gimjb/pbdb/compare/latest...HEAD
+[0.5.0]: https://github.com/gimjb/pbdb/compare/v0.4.0...v0.5.0
+[0.4.0]: https://github.com/gimjb/pbdb/compare/v0.3.3...v0.4.0
 [0.3.3]: https://github.com/gimjb/pbdb/compare/v0.3.2...v0.3.3
 [0.3.2]: https://github.com/gimjb/pbdb/compare/v0.3.1...v0.3.2
 [0.3.1]: https://github.com/gimjb/pbdb/compare/v0.3.0...v0.3.1

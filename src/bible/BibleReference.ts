@@ -62,7 +62,13 @@ export default class BibleReference implements BibleReferenceOptions {
     this.book = options.book
     this.chapter = options.chapter
     this.versesStart = versesStart
-    this.versesEnd = Math.max(versesStart, Math.min(options.versesEnd, kjv[options.book][options.chapter - 1]!.length)]))
+    this.versesEnd = Math.max(
+      versesStart,
+      Math.min(
+        options.versesEnd,
+        kjv[options.book][options.chapter - 1]!.length
+      )
+    )
     this.citation =
       `${this.book} ${this.chapter}:` +
       (this.versesStart === this.versesEnd
@@ -72,43 +78,96 @@ export default class BibleReference implements BibleReferenceOptions {
   }
 
   /** Returns a Discord message with the referenced verses. */
-  public quote(options: BibleQuoteOptions): discord.MessageCreateOptions {
+  public quote(options: BibleQuoteOptions): discord.MessageCreateOptions[] {
+    const maxTextLength = 2000 - '\n> — '.length - this.citation.length
+    const maxEmbedLength = 4096
     const { form, inline } = options
-    let messageContent = ''
+    let messages: discord.MessageCreateOptions[] = []
+
+    if (form === 'blockquote') {
+      messages.push({ content: '' })
+
+      if (inline) {
+        messages[0]!.content += '> '
+      }
+    } else {
+      messages.push({
+        embeds: [
+          {
+            title: this.citation,
+            description: ''
+          }
+        ]
+      })
+    }
 
     for (let i = this.versesStart; i <= this.versesEnd; i++) {
-      let verse = kjv[this.book]?.[this.chapter - 1]?.[i - 1]
+      let verse = kjv[this.book]![this.chapter - 1]![i - 1]!
 
       if (inline && i !== this.versesStart) {
         verse = ` ${superscript(i)} ${verse}`
       } else if (!inline && this.versesStart !== this.versesEnd) {
         verse = `${i}. ${verse}\n`
+
+        if (form === 'blockquote') {
+          verse = '> ' + verse
+        }
       }
 
-      messageContent += verse
+      const currentMessage = messages[messages.length - 1]!
+
+      if (form === 'blockquote') {
+        const newMessageContent = currentMessage.content + verse
+
+        if (newMessageContent.trim().length > maxTextLength) {
+          if (inline) {
+            messages.push({ content: `> ${verse}` })
+          } else {
+            messages.push({ content: verse })
+          }
+        } else {
+          currentMessage.content += verse
+        }
+      } else {
+        const currentEmbed =
+          currentMessage.embeds![
+            messages[messages.length - 1]!.embeds!.length - 1
+          ]!
+        /// @ts-expect-error: Property 'description' does not exist on type 'APIEmbed | JSONEncodable<APIEmbed>'.
+        ///   Property 'description' does not exist on type 'JSONEncodable<APIEmbed>'.ts(2339)
+        const newMessageContent = currentEmbed.description + verse
+
+        if (newMessageContent.trim().length > maxEmbedLength) {
+          messages.push({
+            embeds: [
+              {
+                description: verse,
+                color: verse.includes('**')
+                  ? config.jesusColor
+                  : config.nonJesusColor
+              }
+            ]
+          })
+        } else {
+          /// @ts-expect-error: Property 'description' does not exist on type 'APIEmbed | JSONEncodable<APIEmbed>'.
+          ///   Property 'description' does not exist on type 'JSONEncodable<APIEmbed>'.ts(2339)
+          currentEmbed.description += verse
+
+          /// @ts-expect-error: Property 'description' does not exist on type 'APIEmbed | JSONEncodable<APIEmbed>'.
+          ///   Property 'description' does not exist on type 'JSONEncodable<APIEmbed>'.ts(2339)
+          currentEmbed.color = verse.includes('**')
+            ? config.jesusColor
+            : config.nonJesusColor
+        }
+      }
     }
 
-    messageContent = messageContent.trim()
-
-    switch (form) {
-      case 'blockquote':
-        return {
-          content: `> ${messageContent.replace(/\n/g, '\n> ')}\n> — ${
-            this.citation
-          }`
-        }
-      case 'embed':
-        return {
-          embeds: [
-            {
-              title: this.citation,
-              description: messageContent,
-              color: messageContent.includes('**')
-                ? config.jesusColor
-                : config.nonJesusColor
-            }
-          ]
-        }
+    if (form === 'blockquote') {
+      const lastMessage = messages[messages.length - 1]!
+      lastMessage.content =
+        lastMessage.content!.trim() + `\n> — ${this.citation}`
     }
+
+    return messages
   }
 }
