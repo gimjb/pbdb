@@ -255,7 +255,7 @@ const bookNameSynonyms = createSynonymsMap([
   ['Revelation', 'Rev', 'Re']
 ])
 
-function createBookNameRegex() {
+function createRegex() {
   const bookNames = Array.from(bookNameSynonyms.keys())
   return new RegExp(
     `(?<bookName>${bookNames
@@ -268,7 +268,7 @@ function createBookNameRegex() {
   )
 }
 
-const referenceRegex = createBookNameRegex()
+const referenceRegex = createRegex()
 
 interface BibleReferenceMatch {
   index: number
