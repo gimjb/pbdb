@@ -21,6 +21,8 @@ interface BibleQuoteOptions {
   verseDisplay: 'blockquote' | 'embed'
   /** Whether the quoted verses should be inline. */
   inlineVerses: boolean
+  /** Whether to use "straight" or “curly” quotation marks. */
+  curlyQuotes: boolean
 }
 
 function superscript(number: number): string {
@@ -80,7 +82,7 @@ export default class BibleReference implements BibleReferenceOptions {
   public quote(options: BibleQuoteOptions): discord.MessageCreateOptions[] {
     const maxTextLength = 2000 - '\n> — '.length - this.citation.length
     const maxEmbedLength = 4096
-    const { verseDisplay, inlineVerses } = options
+    const { verseDisplay, inlineVerses, curlyQuotes } = options
     const messages: discord.MessageCreateOptions[] = []
 
     if (verseDisplay === 'blockquote') {
@@ -91,6 +93,10 @@ export default class BibleReference implements BibleReferenceOptions {
 
     for (let i = this.versesStart; i <= this.versesEnd; i++) {
       let verse = kjv[this.book][this.chapter]![i]!
+
+      if (curlyQuotes) {
+        verse = verse.replace(/'/g, '’')
+      }
 
       if (inlineVerses && i !== this.versesStart) {
         verse = `${superscript(i)} ${verse} `

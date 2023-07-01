@@ -9,6 +9,8 @@ export interface IUser {
     verseDisplay?: 'embed' | 'blockquote'
     /** Whether or not to display verses inline. */
     inlineVerses?: boolean
+    /** Whether or not to use curly quotes. */
+    curlyQuotes?: boolean
   }
 }
 
@@ -23,6 +25,10 @@ const userSchema = new mongoose.Schema<IUser>({
     inlineVerses: {
       type: Boolean,
       default: false
+    },
+    curlyQuotes: {
+      type: Boolean,
+      default: true
     }
   }
 })

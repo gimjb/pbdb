@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Clamp the first verse in a range to one. For example, saying `John 1:0` will
   post John 1:**_1_**.
+- Option (in `/settings`) to use “curly” or "straigth" quotation marks in
+  verses.
 
 ---
 

@@ -42,7 +42,7 @@ client.on('messageCreate', async message => {
 
   if (references.length === 0) return
 
-  const { verseDisplay, inlineVerses } = (
+  const { verseDisplay, inlineVerses, curlyQuotes } = (
     await usersController.get(message.author.id)
   ).preferences
 
@@ -50,7 +50,8 @@ client.on('messageCreate', async message => {
     reference =>
       reference.quote({
         verseDisplay: verseDisplay ?? 'embed',
-        inlineVerses: inlineVerses ?? false
+        inlineVerses: inlineVerses ?? false,
+        curlyQuotes: curlyQuotes ?? true
       })
   )
 

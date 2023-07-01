@@ -31,6 +31,18 @@ async function createInteractionReply(userId: string) {
             user.preferences.inlineVerses
               ? discord.ButtonStyle.Success
               : discord.ButtonStyle.Danger
+          ),
+        new discord.ButtonBuilder()
+          .setCustomId('curlyQuotes')
+          .setLabel(
+            `Quotation Marks: ${
+              user.preferences.curlyQuotes ? '“Curly”' : '"Straight"'
+            }`
+          )
+          .setStyle(
+            user.preferences.curlyQuotes
+              ? discord.ButtonStyle.Primary
+              : discord.ButtonStyle.Secondary
           )
       )
     ]
@@ -58,6 +70,8 @@ async function awaitMessageComponent(
         }
       } else if (i.customId === 'inlineVerses') {
         user.preferences.inlineVerses = !user.preferences.inlineVerses
+      } else if (i.customId === 'curlyQuotes') {
+        user.preferences.curlyQuotes = !user.preferences.curlyQuotes
       }
 
       await user.save()
