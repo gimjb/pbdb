@@ -49,12 +49,11 @@ export default class BibleReference implements BibleReferenceOptions {
         `Chapter ${options.chapter} does not exist in ${options.book}.`
       )
     } else if (
-      typeof kjv[options.book][options.chapter - 1]?.[versesStart - 1] ===
-      'undefined'
+      typeof kjv[options.book][options.chapter]![versesStart] === 'undefined'
     ) {
       throw new Error(
         `${options.book} ${options.chapter} only has ${
-          kjv[options.book][options.chapter - 1]?.length
+          kjv[options.book][options.chapter]!.length
         } verses.`
       )
     }
@@ -64,10 +63,7 @@ export default class BibleReference implements BibleReferenceOptions {
     this.versesStart = versesStart
     this.versesEnd = Math.max(
       versesStart,
-      Math.min(
-        options.versesEnd,
-        kjv[options.book][options.chapter - 1]!.length
-      )
+      Math.min(options.versesEnd, kjv[options.book][options.chapter]!.length)
     )
     this.citation =
       `${this.book} ${this.chapter}:` +
@@ -82,65 +78,47 @@ export default class BibleReference implements BibleReferenceOptions {
     const maxTextLength = 2000 - '\n> — '.length - this.citation.length
     const maxEmbedLength = 4096
     const { form, inline } = options
-    let messages: discord.MessageCreateOptions[] = []
+    const messages: discord.MessageCreateOptions[] = []
 
     if (form === 'blockquote') {
-      messages.push({ content: '' })
-
-      if (inline) {
-        messages[0]!.content += '> '
-      }
+      messages.push({ content: '> ' })
     } else {
-      messages.push({
-        embeds: [
-          {
-            title: this.citation,
-            description: ''
-          }
-        ]
-      })
+      messages.push({ embeds: [{ title: this.citation, description: '' }] })
     }
 
     for (let i = this.versesStart; i <= this.versesEnd; i++) {
-      let verse = kjv[this.book]![this.chapter - 1]![i - 1]!
+      let verse = kjv[this.book][this.chapter]![i]!
 
       if (inline && i !== this.versesStart) {
-        verse = ` ${superscript(i)} ${verse}`
+        verse = `${superscript(i)} ${verse} `
       } else if (!inline && this.versesStart !== this.versesEnd) {
         verse = `${i}. ${verse}\n`
 
         if (form === 'blockquote') {
-          verse = '> ' + verse
+          verse += '> '
         }
       }
 
       const currentMessage = messages[messages.length - 1]!
 
       if (form === 'blockquote') {
-        const newMessageContent = currentMessage.content + verse
+        const newContent = currentMessage.content + verse
 
-        if (newMessageContent.trim().length > maxTextLength) {
-          if (inline) {
-            messages.push({ content: `> ${verse}` })
-          } else {
-            messages.push({ content: verse })
-          }
+        if (newContent.length > maxTextLength) {
+          messages.push({ content: '> ' + verse })
         } else {
-          currentMessage.content += verse
+          currentMessage.content = newContent
         }
       } else {
-        const currentEmbed =
-          currentMessage.embeds![
-            messages[messages.length - 1]!.embeds!.length - 1
-          ]!
-        /// @ts-expect-error: Property 'description' does not exist on type 'APIEmbed | JSONEncodable<APIEmbed>'.
-        ///   Property 'description' does not exist on type 'JSONEncodable<APIEmbed>'.ts(2339)
-        const newMessageContent = currentEmbed.description + verse
+        const currentEmbed = currentMessage.embeds![0]!
+        /// @ts-expect-error
+        const newDescription = currentEmbed.description + verse
 
-        if (newMessageContent.trim().length > maxEmbedLength) {
+        if (newDescription.length > maxEmbedLength) {
           messages.push({
             embeds: [
               {
+                title: this.citation,
                 description: verse,
                 color: verse.includes('**')
                   ? config.jesusColor
@@ -149,13 +127,10 @@ export default class BibleReference implements BibleReferenceOptions {
             ]
           })
         } else {
-          /// @ts-expect-error: Property 'description' does not exist on type 'APIEmbed | JSONEncodable<APIEmbed>'.
-          ///   Property 'description' does not exist on type 'JSONEncodable<APIEmbed>'.ts(2339)
-          currentEmbed.description += verse
-
-          /// @ts-expect-error: Property 'description' does not exist on type 'APIEmbed | JSONEncodable<APIEmbed>'.
-          ///   Property 'description' does not exist on type 'JSONEncodable<APIEmbed>'.ts(2339)
-          currentEmbed.color = verse.includes('**')
+          /// @ts-expect-error
+          currentEmbed.description = newDescription
+          /// @ts-expect-error
+          currentEmbed.color = newDescription.includes('**')
             ? config.jesusColor
             : config.nonJesusColor
         }
@@ -163,9 +138,7 @@ export default class BibleReference implements BibleReferenceOptions {
     }
 
     if (form === 'blockquote') {
-      const lastMessage = messages[messages.length - 1]!
-      lastMessage.content =
-        lastMessage.content!.trim() + `\n> — ${this.citation}`
+      messages[messages.length - 1]!.content += `— ${this.citation}`
     }
 
     return messages
