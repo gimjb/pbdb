@@ -42,7 +42,10 @@ export default class BibleReference implements BibleReferenceOptions {
   public readonly versesEnd: number
 
   constructor(options: BibleReferenceOptions) {
-    let versesStart = Math.min(options.versesStart, options.versesEnd)
+    let versesStart = Math.max(
+      1,
+      Math.min(options.versesStart, options.versesEnd)
+    )
 
     if (options.chapter > kjv[options.book].length) {
       throw new Error(

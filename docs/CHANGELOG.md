@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [Unreleased]
+
+### Added
+
+- Clamp the first verse in a range to one. For example, saying `John 1:0` will
+  post John 1:**_1_**.
+
+---
+
 ## [0.5.0]: 2023-06-30
 
 ### Added
