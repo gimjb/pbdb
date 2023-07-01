@@ -18,9 +18,9 @@ interface BibleReferenceOptions {
 
 interface BibleQuoteOptions {
   /** The form of the message. */
-  form: 'blockquote' | 'embed'
+  verseDisplay: 'blockquote' | 'embed'
   /** Whether the quoted verses should be inline. */
-  inline: boolean
+  inlineVerses: boolean
 }
 
 function superscript(number: number): string {
@@ -80,10 +80,10 @@ export default class BibleReference implements BibleReferenceOptions {
   public quote(options: BibleQuoteOptions): discord.MessageCreateOptions[] {
     const maxTextLength = 2000 - '\n> — '.length - this.citation.length
     const maxEmbedLength = 4096
-    const { form, inline } = options
+    const { verseDisplay, inlineVerses } = options
     const messages: discord.MessageCreateOptions[] = []
 
-    if (form === 'blockquote') {
+    if (verseDisplay === 'blockquote') {
       messages.push({ content: '> ' })
     } else {
       messages.push({ embeds: [{ title: this.citation, description: '' }] })
@@ -92,19 +92,19 @@ export default class BibleReference implements BibleReferenceOptions {
     for (let i = this.versesStart; i <= this.versesEnd; i++) {
       let verse = kjv[this.book][this.chapter]![i]!
 
-      if (inline && i !== this.versesStart) {
+      if (inlineVerses && i !== this.versesStart) {
         verse = `${superscript(i)} ${verse} `
-      } else if (!inline && this.versesStart !== this.versesEnd) {
+      } else if (!inlineVerses && this.versesStart !== this.versesEnd) {
         verse = `${i}. ${verse}\n`
 
-        if (form === 'blockquote') {
+        if (verseDisplay === 'blockquote') {
           verse += '> '
         }
       }
 
       const currentMessage = messages[messages.length - 1]!
 
-      if (form === 'blockquote') {
+      if (verseDisplay === 'blockquote') {
         const newContent = currentMessage.content + verse
 
         if (newContent.length > maxTextLength) {
@@ -140,7 +140,7 @@ export default class BibleReference implements BibleReferenceOptions {
       }
     }
 
-    if (form === 'blockquote') {
+    if (verseDisplay === 'blockquote') {
       messages[messages.length - 1]!.content += `— ${this.citation}`
     }
 

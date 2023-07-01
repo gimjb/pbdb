@@ -49,8 +49,8 @@ client.on('messageCreate', async message => {
   const messagesToSend: discord.MessageCreateOptions[] = references.flatMap(
     reference =>
       reference.quote({
-        form: verseDisplay ?? 'embed',
-        inline: inlineVerses ?? false
+        verseDisplay: verseDisplay ?? 'embed',
+        inlineVerses: inlineVerses ?? false
       })
   )
 
