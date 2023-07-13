@@ -1,9 +1,14 @@
 import fs from 'fs'
 import discord from 'discord.js'
-import type { CommandLogic, CommandMetadata } from './ApplicationCommand'
+import type {
+  CommandLogic,
+  CommandMetadata,
+  CommandOnLoad
+} from './ApplicationCommand'
 
 const commandsMetadata: CommandMetadata[] = []
 const commandsLogic: Record<string, CommandLogic> = {}
+const commandsOnLoad: CommandOnLoad[] = []
 
 const files = fs.readdirSync(__dirname)
 
@@ -19,6 +24,9 @@ for (const file of files) {
 
   commandsMetadata.push(command.meta)
   commandsLogic[command.meta.name] = command.execute
+  if (typeof command.onLoad === 'function') {
+    commandsOnLoad.push(command.onLoad)
+  }
 }
 
 /** All application commands. */
@@ -34,6 +42,10 @@ export default {
     await rest.put(discord.Routes.applicationCommands(client.user.id), {
       body: commandsMetadata
     })
+
+    for (const onLoad of commandsOnLoad) {
+      onLoad(commandsMetadata)
+    }
   },
   /** Handle any command interaction. */
   handle: async (interaction: discord.CommandInteraction) => {
