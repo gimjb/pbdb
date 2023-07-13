@@ -258,7 +258,7 @@ const bookNameSynonyms = createSynonymsMap([
 function createRegex() {
   const bookNames = Array.from(bookNameSynonyms.keys())
   return new RegExp(
-    `(?<bookName>${bookNames
+    `(?:^|[\\s^!"#$%&'()*+,-./:;<=>?@[\\\\\\]^_\`{|}~])(?<bookName>${bookNames
       .join('|')
       .replace(
         ' ',

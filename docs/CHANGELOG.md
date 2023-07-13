@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [Unreleased]
+## [0.6.0]
 
 ### Added
 
@@ -15,6 +15,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   post John 1:**_1_**.
 - Option (in `/settings`) to use “curly” or "straigth" quotation marks in
   verses.
+
+### Fixed
+
+- Make sure there is a space before the book name: e.g. a time interval like
+  “from 1:15–2:00” has nothing to do with the book of Romans.
 
 ---
 
