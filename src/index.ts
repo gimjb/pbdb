@@ -21,7 +21,7 @@ const client = new discord.Client({
   presence: {
     activities: [
       {
-        name: `v${process.env['npm_package_version'] ?? '?.?.?'}`
+        name: `/pbdb | v${process.env['npm_package_version'] ?? '?.?.?'}`
       }
     ]
   }
