@@ -99,7 +99,7 @@ export default class BibleReference implements BibleReferenceOptions {
       }
 
       if (inlineVerses && i !== this.versesStart) {
-        verse = `${superscript(i)} ${verse} `
+        verse = ` ${superscript(i)} ${verse}`
       } else if (!inlineVerses && this.versesStart !== this.versesEnd) {
         verse = `${i}. ${verse}\n`
 
@@ -147,7 +147,11 @@ export default class BibleReference implements BibleReferenceOptions {
     }
 
     if (verseDisplay === 'blockquote') {
-      messages[messages.length - 1]!.content += `— ${this.citation}`
+      if (inlineVerses) {
+        messages[messages.length - 1]!.content += '\n> — ' + this.citation
+      } else {
+        messages[messages.length - 1]!.content += '— ' + this.citation
+      }
     }
 
     return messages

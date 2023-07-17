@@ -13,39 +13,47 @@ describe('quote one referenced verse', () => {
     '**For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.**'
 
   test('blockquote; inline', () => {
-    expect(ref.quote({ form: 'blockquote', inline: true }).content).toBe(
-      `> ${expectedVerse}\n> — ${expectedCitation}`
-    )
+    expect(
+      ref.quote({ verseDisplay: 'blockquote', inlineVerses: true })[0].content
+    ).toBe(`> ${expectedVerse}\n> — ${expectedCitation}`)
   })
 
   test('blockquote; not inline', () => {
-    expect(ref.quote({ form: 'blockquote', inline: false }).content).toBe(
-      `> ${expectedVerse}\n> — ${expectedCitation}`
-    )
+    expect(
+      ref.quote({ verseDisplay: 'blockquote', inlineVerses: false })[0].content
+    ).toBe(`> ${expectedVerse}\n> — ${expectedCitation}`)
   })
 
   test('embed; inline', () => {
-    expect(ref.quote({ form: 'embed', inline: true })).toMatchObject({
-      embeds: [
-        {
-          title: expectedCitation,
-          description: expectedVerse,
-          color: config.jesusColor
-        }
-      ]
-    })
+    expect(
+      ref.quote({ verseDisplay: 'embed', inlineVerses: true })
+    ).toMatchObject([
+      {
+        embeds: [
+          {
+            title: expectedCitation,
+            description: expectedVerse,
+            color: config.jesusColor
+          }
+        ]
+      }
+    ])
   })
 
   test('embed; not inline', () => {
-    expect(ref.quote({ form: 'embed', inline: false })).toMatchObject({
-      embeds: [
-        {
-          title: expectedCitation,
-          description: `${expectedVerse}`,
-          color: config.jesusColor
-        }
-      ]
-    })
+    expect(
+      ref.quote({ verseDisplay: 'embed', inlineVerses: false })
+    ).toMatchObject([
+      {
+        embeds: [
+          {
+            title: expectedCitation,
+            description: `${expectedVerse}`,
+            color: config.jesusColor
+          }
+        ]
+      }
+    ])
   })
 })
 
@@ -63,38 +71,50 @@ describe('quote multiple verses', () => {
   ]
 
   test('blockquote; inline', () => {
-    expect(ref.quote({ form: 'blockquote', inline: true }).content).toBe(
+    expect(
+      ref.quote({ verseDisplay: 'blockquote', inlineVerses: true })[0].content
+    ).toBe(
       `> ${expectedVerses[0]} ⁵ ${expectedVerses[1]}\n> — ${expectedCitation}`
     )
   })
 
   test('blockquote; not inline', () => {
-    expect(ref.quote({ form: 'blockquote', inline: false }).content).toBe(
+    expect(
+      ref.quote({ verseDisplay: 'blockquote', inlineVerses: false })[0].content
+    ).toBe(
       `> 4. ${expectedVerses[0]}\n> 5. ${expectedVerses[1]}\n> — ${expectedCitation}`
     )
   })
 
   test('embed; inline', () => {
-    expect(ref.quote({ form: 'embed', inline: true })).toMatchObject({
-      embeds: [
-        {
-          title: expectedCitation,
-          description: `${expectedVerses[0]} ⁵ ${expectedVerses[1]}`,
-          color: config.nonJesusColor
-        }
-      ]
-    })
+    expect(
+      ref.quote({ verseDisplay: 'embed', inlineVerses: true })
+    ).toMatchObject([
+      {
+        embeds: [
+          {
+            title: expectedCitation,
+            description: `${expectedVerses[0]} ⁵ ${expectedVerses[1]}`,
+            color: config.nonJesusColor
+          }
+        ]
+      }
+    ])
   })
 
   test('embed; not inline', () => {
-    expect(ref.quote({ form: 'embed', inline: false })).toMatchObject({
-      embeds: [
-        {
-          title: expectedCitation,
-          description: `4. ${expectedVerses[0]}\n5. ${expectedVerses[1]}`,
-          color: config.nonJesusColor
-        }
-      ]
-    })
+    expect(
+      ref.quote({ verseDisplay: 'embed', inlineVerses: false })
+    ).toMatchObject([
+      {
+        embeds: [
+          {
+            title: expectedCitation,
+            description: `4. ${expectedVerses[0]}\n5. ${expectedVerses[1]}`,
+            color: config.nonJesusColor
+          }
+        ]
+      }
+    ])
   })
 })

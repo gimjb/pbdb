@@ -4,15 +4,16 @@ import mongoose from 'mongoose'
 import bible from './bible'
 import commands from './commands'
 import config from './config'
+import log from './utils/log'
 import usersController from './controllers/users'
 
 mongoose
   .connect(process.env['MONGO_URI'] ?? 'mongodb://localhost:27017/pbdb')
   .then(() => {
-    console.log('Connected to MongoDB.')
+    log.info('Connected to MongoDB.')
   })
   .catch(error => {
-    console.error(error)
+    log.error(error)
     process.exit(1)
   })
 
@@ -67,7 +68,17 @@ client.on('messageCreate', async message => {
 })
 
 client.on('ready', async readyClient => {
-  commands.register(readyClient)
+  await commands.register(readyClient)
+
+  log.info(`Logged in as ${readyClient.user.tag}.`)
+})
+
+client.on('warn', warning => {
+  log.warn(warning)
+})
+
+client.on('error', error => {
+  log.error(error)
 })
 
 client.on('interactionCreate', async interaction => {
