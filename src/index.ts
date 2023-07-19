@@ -81,6 +81,28 @@ client.on('error', error => {
   log.error(error)
 })
 
+client.on('shardDisconnect', (closeEvent, shardId) => {
+  log.warn(`Shard ${shardId} disconnected: ${closeEvent}`)
+
+  client.login(process.env['DISCORD_TOKEN'])
+})
+
+client.on('shardError', (error, shardId) => {
+  log.error(`Shard ${shardId} error: ${error}`)
+})
+
+client.on('shardReady', shardId => {
+  log.info(`Shard ${shardId} ready.`)
+})
+
+client.on('shardReconnecting', shardId => {
+  log.info(`Shard ${shardId} reconnecting.`)
+})
+
+client.on('shardResume', (replayed, shardId) => {
+  log.info(`Shard ${shardId} resumed. Replayed ${replayed} events.`)
+})
+
 client.on('interactionCreate', async interaction => {
   if (!interaction.isCommand()) return
 
