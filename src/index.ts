@@ -47,7 +47,7 @@ client.on('messageCreate', async message => {
     await usersController.get(message.author.id)
   ).preferences
 
-  const messagesToSend: discord.MessageCreateOptions[] = references.flatMap(
+  const messagesToSend: discord.MessageCreateOptions[] = references.map(
     reference =>
       reference.quote({
         verseDisplay: verseDisplay ?? 'embed',

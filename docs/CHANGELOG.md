@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.0]
+
+### Fixed
+
+- Fix blockquote formatting.
+- Post from one verse onwards.
+
+### Removed
+
+- Ability to split long verses into separate messages. Verses that exceed the
+  Discord message character limit will be truncated from now on.
+
 ---
 
 ## [0.8.1]: 2023-07-19
@@ -12,6 +24,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Automatically reconnect to Discord when disconnected — hopefully.
+
+---
 
 ## [0.8.0]: 2023-07-17
 
@@ -129,6 +143,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bot goes online.
 
 [unreleased]: https://github.com/gimjb/pbdb/compare/latest...HEAD
+[0.9.0]: https://github.com/gimjb/pbdb/compare/v0.8.1...v0.9.0
 [0.8.1]: https://github.com/gimjb/pbdb/compare/v0.8.0...v0.8.1
 [0.8.0]: https://github.com/gimjb/pbdb/compare/v0.7.0...v0.8.0
 [0.7.0]: https://github.com/gimjb/pbdb/compare/v0.6.0...v0.7.0

@@ -49,7 +49,7 @@ export default class BibleReference implements BibleReferenceOptions {
       Math.min(options.versesStart, options.versesEnd)
     )
 
-    if (options.chapter > kjv[options.book].length) {
+    if (options.chapter > kjv[options.book].length - 1) {
       throw new Error(
         `Chapter ${options.chapter} does not exist in ${options.book}.`
       )
@@ -58,7 +58,7 @@ export default class BibleReference implements BibleReferenceOptions {
     ) {
       throw new Error(
         `${options.book} ${options.chapter} only has ${
-          kjv[options.book][options.chapter]!.length
+          kjv[options.book][options.chapter]!.length - 1
         } verses.`
       )
     }
@@ -68,7 +68,10 @@ export default class BibleReference implements BibleReferenceOptions {
     this.versesStart = versesStart
     this.versesEnd = Math.max(
       versesStart,
-      Math.min(options.versesEnd, kjv[options.book][options.chapter]!.length)
+      Math.min(
+        options.versesEnd,
+        kjv[options.book][options.chapter]!.length - 1
+      )
     )
     this.citation =
       `${this.book} ${this.chapter}:` +
@@ -79,81 +82,57 @@ export default class BibleReference implements BibleReferenceOptions {
   }
 
   /** Returns a Discord message with the referenced verses. */
-  public quote(options: BibleQuoteOptions): discord.MessageCreateOptions[] {
-    const maxTextLength = 2000 - '\n> — '.length - this.citation.length
-    const maxEmbedLength = 4096
-    const { verseDisplay, inlineVerses, curlyQuotes } = options
-    const messages: discord.MessageCreateOptions[] = []
+  public quote(options: BibleQuoteOptions): discord.MessageCreateOptions {
+    let versesContent = kjv[this.book]
+      [this.chapter]!.slice(this.versesStart, this.versesEnd + 1)
+      .map((verse, index) => {
+        const verseNumber = index + this.versesStart
 
-    if (verseDisplay === 'blockquote') {
-      messages.push({ content: '> ' })
+        if (index !== 0) {
+          if (options.inlineVerses) {
+            return ` ${superscript(verseNumber)} ${verse}`
+          } else {
+            return `\n${verseNumber}. ${verse}`
+          }
+        } else if (
+          !options.inlineVerses &&
+          this.versesStart !== this.versesEnd
+        ) {
+          return `${verseNumber}. ${verse}`
+        }
+
+        return verse
+      })
+      .join('')
+      .replaceAll("'", options.curlyQuotes ? '’' : "'")
+
+    if (options.verseDisplay === 'blockquote') {
+      versesContent = '> ' + versesContent.replaceAll('\n', '\n> ')
+      const maxBlockquoteLength = 2000 - `\n> — ${this.citation}`.length
+      if (versesContent.length > maxBlockquoteLength) {
+        versesContent = versesContent.slice(0, maxBlockquoteLength - 1) + '…'
+      }
+
+      return {
+        content: `${versesContent}\n> — ${this.citation}`
+      }
     } else {
-      messages.push({ embeds: [{ title: this.citation, description: '' }] })
-    }
-
-    for (let i = this.versesStart; i <= this.versesEnd; i++) {
-      let verse = kjv[this.book][this.chapter]![i]!
-
-      if (curlyQuotes) {
-        verse = verse.replace(/'/g, '’')
+      const maxEmbedLength = 4096
+      if (versesContent.length > maxEmbedLength) {
+        versesContent = versesContent.slice(0, maxEmbedLength - 1) + '…'
       }
 
-      if (inlineVerses && i !== this.versesStart) {
-        verse = ` ${superscript(i)} ${verse}`
-      } else if (!inlineVerses && this.versesStart !== this.versesEnd) {
-        verse = `${i}. ${verse}\n`
-
-        if (verseDisplay === 'blockquote') {
-          verse += '> '
-        }
-      }
-
-      const currentMessage = messages[messages.length - 1]!
-
-      if (verseDisplay === 'blockquote') {
-        const newContent = currentMessage.content + verse
-
-        if (newContent.length > maxTextLength) {
-          messages.push({ content: '> ' + verse })
-        } else {
-          currentMessage.content = newContent
-        }
-      } else {
-        const currentEmbed = currentMessage.embeds![0]!
-        /// @ts-expect-error
-        const newDescription = currentEmbed.description + verse
-
-        if (newDescription.length > maxEmbedLength) {
-          messages.push({
-            embeds: [
-              {
-                title: this.citation,
-                description: verse,
-                color: verse.includes('**')
-                  ? config.jesusColor
-                  : config.nonJesusColor
-              }
-            ]
-          })
-        } else {
-          /// @ts-expect-error
-          currentEmbed.description = newDescription
-          /// @ts-expect-error
-          currentEmbed.color = newDescription.includes('**')
-            ? config.jesusColor
-            : config.nonJesusColor
-        }
+      return {
+        embeds: [
+          {
+            title: this.citation,
+            description: versesContent,
+            color: versesContent.includes('**')
+              ? config.jesusColor
+              : config.nonJesusColor
+          }
+        ]
       }
     }
-
-    if (verseDisplay === 'blockquote') {
-      if (inlineVerses) {
-        messages[messages.length - 1]!.content += '\n> — ' + this.citation
-      } else {
-        messages[messages.length - 1]!.content += '— ' + this.citation
-      }
-    }
-
-    return messages
   }
 }
