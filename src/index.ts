@@ -81,10 +81,16 @@ client.on('error', error => {
   log.error(error)
 })
 
-client.on('shardDisconnect', (closeEvent, shardId) => {
+client.on('shardDisconnect', async (closeEvent, shardId) => {
   log.warn(`Shard ${shardId} disconnected: ${closeEvent}`)
 
-  client.login(process.env['DISCORD_TOKEN'])
+  try {
+    await client.shard?.respawnAll()
+
+    log.info('All shards respawned.')
+  } catch (error) {
+    log.error(`Failed to respawn shards: ${error}`)
+  }
 })
 
 client.on('shardError', (error, shardId) => {
