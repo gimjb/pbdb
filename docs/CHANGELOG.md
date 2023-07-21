@@ -14,12 +14,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Make a dot (`.`) synonymous with a colon (`:`) when separating chapter and
   verse numbers. For example, `Eph 1.4` is the same as `Eph 1:4`.
 
+---
+
 ## [0.9.1]: 2023-07-20
 
 ### Fixed
 
 - Use `client.shards.respawnAll` instead of `client.login` to reconnect to
   Discord when disconnected.
+
+---
 
 ## [0.9.0]: 2023-07-19
 
