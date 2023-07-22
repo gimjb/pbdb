@@ -263,7 +263,7 @@ function createRegex() {
       .replace(
         ' ',
         '\\s*'
-      )})\\s*(?<chapter>\\d{1,3})[:.](?<versesStart>\\d{1,3})(?:(?:[-–—](?<versesEnd>\\d{1,3}))|(?<onwards>[-–—]))?`,
+      )})\\s*(?<chapter>\\d{1,3})[:.]\\s*(?<versesStart>\\d{1,3})(?:(?:[-–—](?<versesEnd>\\d{1,3}))|(?<onwards>[-–—]))?`,
     'gi'
   )
 }
