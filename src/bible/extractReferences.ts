@@ -276,7 +276,7 @@ export default function extractReferences(text: string): BibleReference[] {
     reference: BibleReference
   }[] = []
 
-  for (const match of text.matchAll(referenceRegex)) {
+  for (const match of text.replaceAll(/__|\*/g, '').matchAll(referenceRegex)) {
     if (
       !match.groups ||
       !match.groups['bookName'] ||

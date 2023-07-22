@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   and verse numbers. For example, `Eph 1: 4` is the same as `Eph 1:4`. On
   mobile, a space is sometimes automatically inserted after a colon, so this
   should make it easier to type out a verse reference.
+- Allow formatting of verse references. For example, `Eph 1:__4__` should not be
+  ignored by PBDB.
 
 ---
 
