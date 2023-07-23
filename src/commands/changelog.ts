@@ -18,7 +18,7 @@ function processChangelog(changelog: string) {
     toDiscordMarkdown(changelog)
       .trim()
       .slice(0, maxEmbedDescriptionLength)
-      .replace(/(?<= \n)[^ ]* +?$/, '') + changelogPostfix
+      .replace(/(?<= \n)[^ ]* *$/, '') + changelogPostfix
   )
 }
 
