@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Convert Markdown links to Discord Markdown links, including links to version
+  tags in this changelog.
+
 ### Fixed
 
 - Correct displaying of this changelog in `/changelog` command.

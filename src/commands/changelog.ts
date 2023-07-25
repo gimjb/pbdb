@@ -26,8 +26,6 @@ const changelog = processChangelog(
   fs.readFileSync(path.join(__dirname, '../../docs/CHANGELOG.md'), 'utf-8')
 )
 
-console.log(changelog)
-
 const command: ApplicationCommand = {
   meta: {
     name: 'changelog',
