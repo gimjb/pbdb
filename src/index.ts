@@ -36,36 +36,7 @@ client.on('guildCreate', async guild => {
   member.setNickname(config.nickname)
 })
 
-client.on('messageCreate', async message => {
-  if (message.author.bot) return
-
-  const references = bible.extractReferences(message.content)
-
-  if (references.length === 0) return
-
-  const { verseDisplay, inlineVerses, curlyQuotes } = (
-    await usersController.get(message.author.id)
-  ).preferences
-
-  const messagesToSend: discord.MessageCreateOptions[] = references.map(
-    reference =>
-      reference.quote({
-        verseDisplay: verseDisplay ?? 'embed',
-        inlineVerses: inlineVerses ?? false,
-        curlyQuotes: curlyQuotes ?? true
-      })
-  )
-
-  const promises = messagesToSend.map(async messageToSend => {
-    return message.channel.send(messageToSend).catch(error => {
-      // A common error is insufficient permissions to send embeds.
-      // Todo(gimjb): try to send a blockquote instead of an embed.
-      console.error(error)
-    })
-  })
-
-  await Promise.all(promises)
-})
+client.on('messageCreate', bible)
 
 client.on('ready', async readyClient => {
   await commands.register(readyClient)

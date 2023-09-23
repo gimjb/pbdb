@@ -7,6 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [Unreleased]
+
+### Added
+
+- Ability to specify a Bible version.
+- Elzevir Textus Receptus (1624).
+- Scrivener’s Textus Receptus (1894).
+- Ability to post whole chapters. For example, `John 1` will post John 1:1–51.
+- Ability to post cross-chapter verses (e.g. `John 1:1–2:1`).
+
+### Changed
+
+- Verses in the King James Version (1769) will now be postfixed with “(KJV1769)”
+  instead of “(KJV)” to distinguish it from other editions of the KJV.
+- Blockquotes now display the book name, chapter number(s), and verse number(s)
+  in a heading instead of at the bottom of the blockquote.
+
+### Removed
+
+- No longer clamp the first verse in a range to one.
+- No longer cap the last verse of a range to the number of verses in a chapter.
+
+### Fixed
+
+- Remove HTML tags from Bible verses.
+
+---
+
 ## [0.10.0]: 2023-07-25
 
 ### Added
