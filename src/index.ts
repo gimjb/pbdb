@@ -5,7 +5,6 @@ import bible from './bible'
 import commands from './commands'
 import config from './config'
 import log from './utils/log'
-import usersController from './controllers/users'
 
 mongoose
   .connect(process.env['MONGO_URI'] ?? 'mongodb://localhost:27017/pbdb')
