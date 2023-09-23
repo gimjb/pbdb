@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Ignore verses in `[square brackets]`.
+
+## [0.11.0]
+
 ### Added
 
 - Ability to specify a Bible version.
