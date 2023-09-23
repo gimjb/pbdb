@@ -81,9 +81,11 @@ export default async function messageHandler(message: discord.Message) {
     }
 
     if (verseDisplay === 'blockquote') {
-      message.channel.send(concatenatedPassage).catch(error => {
-        log.error(error)
-      })
+      message.channel
+        .send(concatenatedPassage.replace(/\n> $/, ''))
+        .catch(error => {
+          log.error(error)
+        })
     } else {
       message.channel
         .send({
