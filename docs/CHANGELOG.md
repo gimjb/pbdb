@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+---
+
+## [0.12.0]
+
 ### Added
 
 - Ignore verses in \`backticks\` or code blocks.
@@ -17,6 +21,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Ignore verses in `[square brackets]`.
+
+---
 
 ## [0.11.0]
 
