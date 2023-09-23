@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Ignore verses in \`backticks\` or code blocks.
+- Add information about how to ignore verses in the introduction command (`/pbdb`).
+
 ### Fixed
 
 - Ignore verses in `[square brackets]`.

@@ -14,7 +14,15 @@ const helpEmbed: discord.APIEmbed = {
       value:
         'The bot will automatically detect Bible verses in your messages and ' +
         'respond with the detected verse(s). For example, if you type ' +
-        '`Eph 1:4`, the bot will quote Ephesians 1:4.'
+        '“Eph 1:4,” the bot will quote Ephesians 1:4.'
+    },
+    {
+      name: '⛔️ __Ignore Verses__',
+      value:
+        'If you want to prevent the bot from responding to a verse, you can ' +
+        'surround the verse with backticks. For example, if you type ' +
+        '\\`Eph 1:4\\`, the bot will not respond. The same applies to ' +
+        'code blocks: \\`\\`\\`Eph 1:4\\`\\`\\` will also be ignored.'
     },
     {
       name: '⌨️  __Commands__',
@@ -40,7 +48,7 @@ const command: ApplicationCommand = {
   },
   onLoad: async commands => {
     for (const command of commands) {
-      helpEmbed.fields![1]!.value += `\n- \`/${command.name}\`: ${command.description}`
+      helpEmbed.fields![2]!.value += `\n- \`/${command.name}\`: ${command.description}`
     }
   }
 }
