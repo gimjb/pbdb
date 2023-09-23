@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.13.0]: 2023-09-23
+
+### Changed
+
+- Titles of Bible verses are now smaller in blockquotes.
+
 ## [0.12.1]: 2023-09-23
 
 ### Fixed

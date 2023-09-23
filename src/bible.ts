@@ -48,7 +48,7 @@ export default async function messageHandler(message: discord.Message) {
     })
 
     let concatenatedPassage =
-      verseDisplay === 'embed' ? '' : `> # ${passage.name}\n> `
+      verseDisplay === 'embed' ? '' : `> ### ${passage.name}\n> `
 
     let currentChapterNumber = passage.verses[0].chapterNumber
     for (const verse of passage.verses) {
