@@ -29,7 +29,10 @@ export default async function messageHandler(message: discord.Message) {
   if (message.author.bot) return
 
   const passagesOptions = bibleApi.parse({
-    text: message.content.replace(/\[[^\]]*\]|__|\*/g, '')
+    text: message.content.replace(
+      /\[[^\]]+\]|```.+?```|`[^`\n\r]+`|__|\*/gs,
+      ''
+    )
   })
 
   if (passagesOptions.length === 0) return
