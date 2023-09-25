@@ -42,9 +42,22 @@ export default async function messageHandler(message: discord.Message) {
   ).preferences
 
   for (const passageOptions of passagesOptions) {
+    const { getPassageOptions } = passageOptions
+
+    if (
+      getPassageOptions.start.chapterNumber ===
+        getPassageOptions.end.chapterNumber &&
+      getPassageOptions.start.verseNumber === 1 &&
+      getPassageOptions.end.verseNumber === Infinity &&
+      !passageOptions.match[0].includes(':')
+    ) {
+      // This is a chapter-only referennce, but the uesr didn't include a colon.
+      continue
+    }
+
     const passage = await bibleApi.remote.requestPassage({
       version: passageOptions.version,
-      ...passageOptions.getPassageOptions
+      ...getPassageOptions
     })
 
     let concatenatedPassage =

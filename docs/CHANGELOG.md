@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.14.1]: 2023-09-25
+
+### Fixed
+
+- Do not post whole chapters when the user does not intend to.
+
 ## [0.14.0]: 2023-09-24
 
 ### Added
