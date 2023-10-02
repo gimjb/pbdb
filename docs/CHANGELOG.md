@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Latin Vulgate ([`@bible-api/bible-api@0.8.0`](https://github.com/bible-api/bible-api/releases/tag/v0.8.0)).
+- Latin Vulgate ([`@bible-api/bible-api@0.8.0`](https://github.com/bible-api-io/bible-api/releases/tag/v0.8.0)).
 
 ## [0.14.1]: 2023-09-25
 
@@ -25,7 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Biblia Gdańska ([`@bible-api/bible-api@0.5.0`](https://github.com/bible-api/bible-api/releases/tag/v0.5.0)).
+- Biblia Gdańska ([`@bible-api/bible-api@0.5.0`](https://github.com/bible-api-io/bible-api/releases/tag/v0.5.0)).
 
 ## [0.13.0]: 2023-09-23
 
