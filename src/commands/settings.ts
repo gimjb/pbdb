@@ -86,7 +86,8 @@ async function awaitMessageComponent(
 const command: ApplicationCommand = {
   meta: {
     name: 'settings',
-    description: 'Configure the bot to your liking.'
+    description: 'Configure the bot to your liking.',
+    options: []
   },
   execute: async interaction => {
     const response = await interaction.reply(

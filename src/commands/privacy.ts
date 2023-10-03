@@ -20,7 +20,8 @@ const privacy = processPrivacyPolicy(
 const command: ApplicationCommand = {
   meta: {
     name: 'privacy',
-    description: 'Show the privacy policy.'
+    description: 'Show the privacy policy.',
+    options: []
   },
   execute: async interaction => {
     await interaction.reply({

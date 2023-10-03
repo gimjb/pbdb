@@ -1,5 +1,6 @@
 import bibleApi from '@bible-api/bible-api'
 import type discord from 'discord.js'
+import CooldownCache from './CooldownCache'
 import config from './config'
 import log from './utils/log'
 import usersController from './controllers/users'
@@ -59,6 +60,23 @@ export default async function messageHandler(message: discord.Message) {
       version: passageOptions.version,
       ...getPassageOptions
     })
+
+    if (
+      !message.guildId ||
+      CooldownCache.isPassageOnCooldown(
+        message.guildId,
+        message.channelId,
+        passage.name
+      )
+    ) {
+      return
+    }
+
+    CooldownCache.cooldownPassage(
+      message.guildId,
+      message.channelId,
+      passage.name
+    )
 
     let concatenatedPassage =
       verseDisplay === 'embed' ? '' : `> ### ${passage.name}\n> `

@@ -20,7 +20,8 @@ const terms = processTermsOfService(
 const command: ApplicationCommand = {
   meta: {
     name: 'terms',
-    description: 'Show the terms of service.'
+    description: 'Show the terms of service.',
+    options: []
   },
   execute: async interaction => {
     await interaction.reply({

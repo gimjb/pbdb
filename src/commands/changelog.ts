@@ -29,7 +29,8 @@ const changelog = processChangelog(
 const command: ApplicationCommand = {
   meta: {
     name: 'changelog',
-    description: 'Show a list of changes made to the bot.'
+    description: 'Show a list of changes made to the bot.',
+    options: []
   },
   execute: async interaction => {
     await interaction.reply({

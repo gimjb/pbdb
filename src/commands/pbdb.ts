@@ -38,7 +38,8 @@ const helpEmbed: discord.APIEmbed = {
 const command: ApplicationCommand = {
   meta: {
     name: 'pbdb',
-    description: 'Get introduced on how to use PBDB.'
+    description: 'Get introduced on how to use PBDB.',
+    options: []
   },
   execute: async interaction => {
     await interaction.reply({
