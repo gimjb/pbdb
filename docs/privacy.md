@@ -5,16 +5,24 @@ maintains information collected from users of the Discord bot.
 
 ## Information Collection and Use
 
-PBDB collects and stores user preferences for displaying Bible verses, such as
-the desired verse format and the display options. This information is collected
-through the `/settings` command and is associated with the user's Discord ID.
-The collected information is used solely for the purpose of providing customized
-verse displays as per the user's preferences.
+PBDB collects, stores, and processes the following information:
+
+- user preferences (`/settings`) for displaying Bible verses:
+  - the user’s Discord ID;
+  - whether to post as a Discord embed or blockquote;
+  - whether to post verses inline or on separate lines; and
+  - whether to use "straight" or "curly” quotes (also known as "smart" quotes);
+- the cooldown period for posting the same verse in the same version in the same
+  channel (default: 3 minutes):
+  - the server’s Discord ID;
+  - the channel’s Discord ID; and
+  - the verse’s reference (e.g., `John 3:16`).
 
 ## Information Sharing
 
 The information collected by PBDB is not shared with any third parties. It is
-used exclusively by the bot to deliver personalized verse displays.
+used exclusively by the bot to deliver personalized verse displays and to
+prevent spamming of verses or changing or removing the cooldown period.
 
 ## Data Security
 

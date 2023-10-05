@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.17.0]: 2023-10-05:
+
+### Changed
+
+- Updated the privacy policy to improve clarity and include information about
+  the new verse cooldown feature.
+
 ## [0.16.0]: 2023-10-03
 
 ### Added
