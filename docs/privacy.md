@@ -13,16 +13,18 @@ PBDB collects, stores, and processes the following information:
   - whether to post verses inline or on separate lines; and
   - whether to use "straight" or "curly” quotes (also known as "smart" quotes);
 - the cooldown period for posting the same verse in the same version in the same
-  channel (default: 3 minutes):
+  channel (default: 3 minutes (180 seconds)):
   - the server’s Discord ID;
+  - the preferred duration of the cooldown period (`/cooldown <duration>`);
   - the channel’s Discord ID; and
-  - the verse’s reference (e.g., `John 3:16`).
+  - the verse’s reference (e.g., `Ephesians 1:4 (KJV1769)`).
 
 ## Information Sharing
 
 The information collected by PBDB is not shared with any third parties. It is
-used exclusively by the bot to deliver personalized verse displays and to
-prevent spamming of verses or changing or removing the cooldown period.
+used exclusively by the bot to deliver personalized verse displays and to change
+or remove the verse cooldown duration that is intended to prevent spamming of
+the same verse.
 
 ## Data Security
 

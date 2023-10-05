@@ -9,11 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Update the [privacy policy] to include information about the new verse cooldown
+  feature (again).
+
 ## [0.17.0]: 2023-10-05:
 
 ### Changed
 
-- Updated the privacy policy to improve clarity and include information about
+- Updated the [privacy policy] to improve clarity and include information about
   the new verse cooldown feature.
 
 ## [0.16.0]: 2023-10-03
@@ -280,7 +285,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `/changelog` command to show this file.
-- `/privacy` command to show privacy policy.
+- `/privacy` command to show [privacy policy].
 - `/terms` command to show terms of service.
 - `/settings` to configure the bot.
 - Set nickname to `PBDB` when joining a server.
@@ -294,6 +299,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Bot goes online.
 
+[privacy policy]: https://github.com/gimjb/pbdb/blob/master/docs/privacy.md
 [unreleased]: https://github.com/gimjb/pbdb/compare/latest...HEAD
 [0.16.0]: https://github.com/gimjb/pbdb/compare/v0.15.0...v0.16.0
 [0.15.0]: https://github.com/gimjb/pbdb/compare/v0.14.1...v0.15.0
