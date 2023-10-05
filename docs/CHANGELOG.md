@@ -7,14 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [Unreleased]
+## [0.18.0]: 2023-10-05
+
+### Added
+
+- Pure Cambridge Edition ([`@bible-api/bible-api@0.10.0`](https://github.com/bible-api-io/bible-api/releases/tag/v0.10.0)).
 
 ### Changed
 
+- The default version is now the Pure Cambridge Edition.
 - Update the [privacy policy] to include information about the new verse cooldown
   feature (again).
 
-## [0.17.0]: 2023-10-05:
+## [0.17.0]: 2023-10-05
 
 ### Changed
 

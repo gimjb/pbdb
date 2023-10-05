@@ -410,10 +410,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@bible-api/bible-api@npm:^0.8.0":
-  version: 0.8.0
-  resolution: "@bible-api/bible-api@npm:0.8.0"
-  checksum: d0fcd4df819f191c2a08a810b7b8390d06eb58030d3b8601f3cb696de2fa27aec024deb3caec835a00babe1647c238f0f0f064ac2d4d753e9ed93d2acb216278
+"@bible-api/bible-api@npm:^0.10.0":
+  version: 0.10.0
+  resolution: "@bible-api/bible-api@npm:0.10.0"
+  checksum: d9481dd810e238826fd8ed859243e8cd310fa3a6d32e038653c1400f9db157b33495c3a0e62dd59f26db13914bd3d4a6ba391cf56ac42a0d1a3c34e7c2506137
   languageName: node
   linkType: hard
 
@@ -5138,7 +5138,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
-    "@bible-api/bible-api": ^0.8.0
+    "@bible-api/bible-api": ^0.10.0
     "@types/node": ^20.3.0
     discord-api-types: ^0.37.59
     discord.js: ^14.11.0
