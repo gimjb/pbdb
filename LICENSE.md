@@ -1,6 +1,7 @@
 # MIT No Attribution (MIT-0)
 
-Copyright © 2023 Daniel Ebert <<090302@5409.dk>>
+Copyright © 2023 Gabriel Israel Mikael Jakob Benjamin Samuel Daniel Ebert
+<<090302@5409.dk>>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
