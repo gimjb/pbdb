@@ -1,5 +1,5 @@
 import bibleApi from '@bible-api/bible-api'
-import type discord from 'discord.js'
+import discord from 'discord.js'
 import CooldownCache from './CooldownCache'
 import config from './config'
 import log from './utils/log'
@@ -26,8 +26,90 @@ function superscript(number: number) {
     .join('')
 }
 
+async function createMessageOptions(
+  message: discord.Message,
+  passage: any
+): Promise<void | discord.BaseMessageOptions> {
+  const { verseDisplay, inlineVerses, curlyQuotes } = (
+    await usersController.get(message.author.id)
+  ).preferences
+
+  let concatenatedPassage =
+    verseDisplay === 'embed' ? '' : `> ### ${passage.name}\n> `
+
+  let currentChapterNumber = passage.verses[0].chapterNumber
+  for (const verse of passage.verses) {
+    let toAdd = ''
+    if (verse.chapterNumber !== currentChapterNumber) {
+      currentChapterNumber = verse.chapterNumber
+      toAdd += '\n### Chapter ' + verse.chapterNumber + '\n'
+    }
+
+    if (inlineVerses) {
+      toAdd += `${superscript(verse.verseNumber)} ${verse.markdown} `
+    } else {
+      toAdd += `${verse.verseNumber}. ${verse.markdown}\n`
+    }
+
+    toAdd = curlyQuotes ? toAdd.replace(/'/g, '’') : toAdd
+    toAdd = verseDisplay === 'embed' ? toAdd : toAdd.replace(/\n/g, '\n> ')
+
+    if (
+      (verseDisplay === 'embed' &&
+        concatenatedPassage.length + toAdd.length < 4096) ||
+      (verseDisplay === 'blockquote' &&
+        concatenatedPassage.length + toAdd.length < 2000)
+    ) {
+      concatenatedPassage += toAdd
+    } else {
+      concatenatedPassage += '…'
+      break
+    }
+  }
+
+  if (verseDisplay === 'blockquote') {
+    return {
+      content: concatenatedPassage.replace(/\n> $/, '')
+    }
+  } else {
+    return {
+      embeds: [
+        {
+          title: passage.name,
+          description: concatenatedPassage,
+          color: concatenatedPassage.includes('**')
+            ? config.jesusColor
+            : config.nonJesusColor
+        }
+      ]
+    }
+  }
+}
+
+async function postPassage(
+  message: discord.Message,
+  passageName: string,
+  messageOptions: discord.BaseMessageOptions
+) {
+  if (message.author.id === message.channel.client.user.id) {
+    await message.edit({ ...messageOptions, components: [] })
+    return
+  }
+
+  message.channel.send(messageOptions)
+
+  if (message.guildId) {
+    CooldownCache.cooldownPassage(
+      message.guildId,
+      message.channelId,
+      passageName
+    )
+  }
+}
+
 export default async function messageHandler(message: discord.Message) {
   if (message.author.bot) return
+  message.channel
 
   const passagesOptions = bibleApi.parse({
     text: message.content.replace(
@@ -38,23 +120,8 @@ export default async function messageHandler(message: discord.Message) {
 
   if (passagesOptions.length === 0) return
 
-  const { verseDisplay, inlineVerses, curlyQuotes } = (
-    await usersController.get(message.author.id)
-  ).preferences
-
   for (const passageOptions of passagesOptions) {
     const { getPassageOptions } = passageOptions
-
-    if (
-      getPassageOptions.start.chapterNumber ===
-        getPassageOptions.end.chapterNumber &&
-      getPassageOptions.start.verseNumber === 1 &&
-      getPassageOptions.end.verseNumber === Infinity &&
-      !passageOptions.match[0].includes(':')
-    ) {
-      // This is a chapter-only referennce, but the uesr didn't include a colon.
-      continue
-    }
 
     const passage = await bibleApi.remote.requestPassage({
       version: passageOptions.version,
@@ -62,7 +129,7 @@ export default async function messageHandler(message: discord.Message) {
     })
 
     if (
-      !message.guildId ||
+      message.guildId &&
       CooldownCache.isPassageOnCooldown(
         message.guildId,
         message.channelId,
@@ -72,69 +139,45 @@ export default async function messageHandler(message: discord.Message) {
       return
     }
 
-    CooldownCache.cooldownPassage(
-      message.guildId,
-      message.channelId,
-      passage.name
-    )
+    const messageOptions = await createMessageOptions(message, passage)
 
-    let concatenatedPassage =
-      verseDisplay === 'embed' ? '' : `> ### ${passage.name}\n> `
+    if (!messageOptions) continue
 
-    let currentChapterNumber = passage.verses[0].chapterNumber
-    for (const verse of passage.verses) {
-      let toAdd = ''
-      if (verse.chapterNumber !== currentChapterNumber) {
-        currentChapterNumber = verse.chapterNumber
-        toAdd += '\n### Chapter ' + verse.chapterNumber + '\n'
-      }
+    if (
+      getPassageOptions.start.verseNumber === 1 &&
+      getPassageOptions.end.verseNumber === Infinity
+    ) {
+      // This is a chapter-only reference: confirmation is required.
+      const inquiry = await message.channel.send({
+        content:
+          `Did you mean to post **${passage.name}**? ` +
+          'Confirmation is required for whole chapters.',
+        components: [
+          new discord.ActionRowBuilder<discord.ButtonBuilder>().addComponents(
+            new discord.ButtonBuilder()
+              .setCustomId('yes')
+              .setLabel('Yes, post it')
+              .setStyle(discord.ButtonStyle.Success),
+            new discord.ButtonBuilder()
+              .setCustomId('no')
+              .setLabel('No, do not post it')
+              .setStyle(discord.ButtonStyle.Danger)
+          )
+        ]
+      })
 
-      if (inlineVerses) {
-        toAdd += `${superscript(verse.verseNumber)} ${verse.markdown} `
-      } else {
-        toAdd += `${verse.verseNumber}. ${verse.markdown}\n`
-      }
+      inquiry.awaitMessageComponent().then(async interaction => {
+        if (interaction.customId === 'yes') {
+          postPassage(interaction.message, passage.name, messageOptions)
+          return
+        }
 
-      toAdd = curlyQuotes ? toAdd.replace(/'/g, '’') : toAdd
-      toAdd = verseDisplay === 'embed' ? toAdd : toAdd.replace(/\n/g, '\n> ')
+        interaction.message.delete()
+      })
 
-      if (
-        (verseDisplay === 'embed' &&
-          concatenatedPassage.length + toAdd.length < 4096) ||
-        (verseDisplay === 'blockquote' &&
-          concatenatedPassage.length + toAdd.length < 2000)
-      ) {
-        concatenatedPassage += toAdd
-      } else {
-        concatenatedPassage += '…'
-        break
-      }
+      continue
     }
 
-    if (verseDisplay === 'blockquote') {
-      message.channel
-        .send(concatenatedPassage.replace(/\n> $/, ''))
-        .catch(error => {
-          log.error(error)
-        })
-    } else {
-      message.channel
-        .send({
-          embeds: [
-            {
-              title: passage.name,
-              description: concatenatedPassage,
-              color: concatenatedPassage.includes('**')
-                ? config.jesusColor
-                : config.nonJesusColor
-            }
-          ]
-        })
-        .catch(error => {
-          // A common error is insufficient permissions to send embeds.
-          // Todo(gimjb): try to send a blockquote instead of an embed.
-          log.error(error)
-        })
-    }
+    await postPassage(message, passage.name, messageOptions)
   }
 }

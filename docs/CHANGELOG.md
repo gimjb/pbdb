@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.19.0]: 2023-10-16
+
+### Added
+
+- Ask for confirmation when posting whole chapters.
+
+### Removed
+
+- A colon is no longer required to post a single chapter.
+
 ## [0.18.0]: 2023-10-05
 
 ### Added
