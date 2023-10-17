@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [Unreleased]
+
+### Fixed
+
+- Remove inquiry when the user has confirmed that a chapter should be posted.
+  Previously, the inquiry would still be part of the message when using the
+  embed format.
+
 ## [0.19.0]: 2023-10-16
 
 ### Added

@@ -74,6 +74,7 @@ async function createMessageOptions(
     }
   } else {
     return {
+      content: '',
       embeds: [
         {
           title: passage.name,
