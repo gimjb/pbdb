@@ -69,7 +69,8 @@ async function createMessageOptions(
 
   if (verseDisplay === 'blockquote') {
     return {
-      content: concatenatedPassage.replace(/\n> $/, '')
+      content: concatenatedPassage.replace(/\n> $/, ''),
+      components: []
     }
   } else {
     return {
@@ -81,7 +82,8 @@ async function createMessageOptions(
             ? config.jesusColor
             : config.nonJesusColor
         }
-      ]
+      ],
+      components: []
     }
   }
 }
@@ -92,7 +94,7 @@ async function postPassage(
   messageOptions: discord.BaseMessageOptions
 ) {
   if (message.author.id === message.channel.client.user.id) {
-    await message.edit({ ...messageOptions, components: [] })
+    await message.edit(messageOptions)
     return
   }
 
