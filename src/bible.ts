@@ -142,6 +142,7 @@ export default async function messageHandler(message: discord.Message) {
       )
     ) {
       message.react('⏳').catch(() => {})
+      continue
     }
 
     const messageOptions = await createMessageOptions(message, passage)
