@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- When a passage is on cooldown, the bot will react with a clock emoji.
+
 ### Fixed
 
 - Remove inquiry when the user has confirmed that a chapter should be posted.
