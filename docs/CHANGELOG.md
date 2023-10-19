@@ -25,6 +25,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Ask for confirmation when posting whole chapters.
 
+### Changed
+
+- Rename “PCE” to “KJV1900” so that it is more clear that it is the 1900 edition
+  of the King James Version.
+
 ### Removed
 
 - A colon is no longer required to post a single chapter.

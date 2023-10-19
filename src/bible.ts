@@ -34,8 +34,10 @@ async function createMessageOptions(
     await usersController.get(message.author.id)
   ).preferences
 
+  const passageName = passage.name.replace(/\(PCE\)/, '(KJV1900)')
+
   let concatenatedPassage =
-    verseDisplay === 'embed' ? '' : `> ### ${passage.name}\n> `
+    verseDisplay === 'embed' ? '' : `> ### ${passageName}\n> `
 
   let currentChapterNumber = passage.verses[0].chapterNumber
   for (const verse of passage.verses) {
@@ -77,7 +79,7 @@ async function createMessageOptions(
       content: '',
       embeds: [
         {
-          title: passage.name,
+          title: passageName,
           description: concatenatedPassage,
           color: concatenatedPassage.includes('**')
             ? config.jesusColor
