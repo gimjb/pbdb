@@ -1,0 +1,33 @@
+name: Automatically set version tag
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  tag-version:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Check for package.json changes
+        id: package-json-changes
+        shell: bash
+        run: git diff --name-only ${{github.event.before}} ${{github.after}} | grep package.json
+
+      - name: Create version tag
+        if: steps.package-json-changes.outputs.result == 'package.json'
+        shell: bash
+        run: |
+          TAG_NAME=v$(node -p "require('./package.json').version")
+          if git rev-parse --verify --quiet $TAG_NAME; then
+            echo "Tag $TAG_NAME already exists"
+          else
+            git tag $TAG_NAME
+            if [[ ! $TAG_NAME =~ '-' ]]; then
+              git tag latest -f
+            fi
+            git push --tags -f
+          fi

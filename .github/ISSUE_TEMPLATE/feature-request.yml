@@ -1,0 +1,53 @@
+name: Feature Request
+description: Suggest a new feature or enhancement
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for taking the time to suggest a new feature or enhancement! Please fill out the information below to help us understand your suggestion.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: |
+        Please describe the feature or enhancement you would like to see.
+      placeholder: |
+        When a user …, I would like to see the bot respond with, “…”
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation
+      description: |
+        Please describe why you would like to see this feature or enhancement.
+      placeholder: |
+        This feature would be useful because …
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Information
+      description: |
+        Please provide any additional information that may be helpful.
+      placeholder: |
+        Here is some additional information that may be helpful …
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      description: |
+        Please check all that apply.
+      options:
+        - label: I have searched the existing issues to ensure this is not a duplicate
+          required: true
+        - label: I agree to follow the [code of conduct](../../docs/CODE_OF_CONDUCT.md) in this project
+          required: true

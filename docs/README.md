@@ -7,6 +7,11 @@
 PBDB is a work-in-progress Discord bot. The goal is to have a bot that can be
 used to reference Bible verses (KJV) and quickly look up theological terms.
 
+## Contributions
+
+Contributions are welcome! Please read the [Code of Conduct](CODE_OF_CONDUCT.md)
+and [Contributing](CONTRIBUTING.md) documents before contributing.
+
 ## License
 
 This project is licensed under the MIT-0 License; see the
