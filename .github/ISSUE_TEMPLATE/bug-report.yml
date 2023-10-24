@@ -1,0 +1,66 @@
+name: Bug Report
+description: Describe a bug or unexpected behavior you have encountered
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for taking the time to report a bug! Please fill out the information below to help us reproduce the issue and fix it.
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction Steps
+      description: |
+        Please provide a list of steps to reproduce the issue.
+      placeholder: |
+        1. Send a message saying, “…”
+        2. Wait for the bot to respond with, “…”
+        3. Send a message saying, “…”
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: |
+        Please describe what you expected to happen.
+      placeholder: |
+        I expected the bot to respond with, “…”
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual (Unexpected) Behavior
+      description: |
+        Please describe what actually happened.
+      placeholder: |
+        The bot responded with, “…”
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Information
+      description: |
+        Please provide any additional information that may be helpful.
+      placeholder: |
+        Here is some additional information that may be helpful …
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      description: |
+        Please check all that apply.
+      options:
+        - label: I have searched the existing issues to ensure this is not a duplicate
+          required: true
+        - label: I agree to follow the [code of conduct](../../docs/CODE_OF_CONDUCT.md) in this project
+          required: true
