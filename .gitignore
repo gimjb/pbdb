@@ -6,7 +6,6 @@
 
 # Bun
 node_modules
-bun.lockb
 
 # TypeScript
 src/**/*.d.ts
