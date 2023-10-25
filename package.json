@@ -3,11 +3,10 @@
   "private": true,
   "packageManager": "yarn@3.6.0",
   "scripts": {
-    "dev": "tsc -w & nodemon src/index.js",
+    "dev": "nodemon --exec 'bun src/index.ts'",
     "test": "jest",
     "lint": "ts-standard",
-    "build": "tsc",
-    "start": "node src/index.js"
+    "start": "bun src/index.ts"
   },
   "dependencies": {
     "@bible-api/bible-api": "^0.10.0",

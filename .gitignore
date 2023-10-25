@@ -4,14 +4,9 @@
 # Secrets
 .env
 
-# Yarn
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions
-.pnp.*
+# Bun
+node_modules
+bun.lockb
 
 # TypeScript
 src/**/*.d.ts
