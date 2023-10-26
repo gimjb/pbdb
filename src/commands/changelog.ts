@@ -13,11 +13,12 @@ const changelogPostfix =
   ` can be found in the official [GitHub repository](${config.officialRepository}).`
 const maxEmbedDescriptionLength = 4096 - changelogPostfix.length
 
-function processChangelog(changelog: string) {
+function processChangelog (changelog: string): string {
   return (
     toDiscordMarkdown(changelog)
       .trim()
       .slice(0, maxEmbedDescriptionLength)
+      // eslint-disable-next-line no-irregular-whitespace
       .replace(/(?<= \n)[^ ]* *$/, '') + changelogPostfix
   )
 }

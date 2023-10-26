@@ -1,7 +1,6 @@
-import discord, { Permissions } from 'discord.js'
 import { ApplicationCommandOptionType } from 'discord-api-types/v10'
 import type ApplicationCommand from './ApplicationCommand'
-import CooldownCache from '../CooldownCache'
+import CooldownCache from '../cooldownCache'
 
 const command: ApplicationCommand = {
   meta: {
@@ -19,7 +18,7 @@ const command: ApplicationCommand = {
     ]
   },
   execute: async interaction => {
-    if (!interaction.guildId) return
+    if (interaction.guildId === null) return
 
     const updatedValue = interaction.options.get('seconds')?.value as
       | number
@@ -36,9 +35,7 @@ const command: ApplicationCommand = {
       })
     }
 
-    const { member } = interaction
-
-    if (!interaction.memberPermissions?.has('ManageGuild')) {
+    if (interaction.memberPermissions?.has('ManageGuild') !== true) {
       return await interaction.reply({
         content:
           'You must have the “Manage Server” permission to change the ' +
@@ -56,7 +53,7 @@ const command: ApplicationCommand = {
       })
     }
 
-    CooldownCache.setCooldownValue(interaction.guildId, updatedValue)
+    await CooldownCache.setCooldownValue(interaction.guildId, updatedValue)
 
     return await interaction.reply({
       content:

@@ -5,6 +5,7 @@ import type {
   CommandMetadata,
   CommandOnLoad
 } from './ApplicationCommand'
+import log from '../utils/log'
 
 const commandsMetadata: CommandMetadata[] = []
 const commandsLogic: Record<string, CommandLogic> = {}
@@ -12,22 +13,27 @@ const commandsOnLoad: CommandOnLoad[] = []
 
 const files = fs.readdirSync(__dirname)
 
-for (const file of files) {
-  if (
-    !file.endsWith('.js') ||
-    file === 'index.js' ||
-    file === 'ApplicationCommand.js'
-  )
-    continue
+async function loadCommandsFromFiles (): Promise<void> {
+  for (const file of files) {
+    if (
+      !file.endsWith('.js') ||
+      file === 'index.js' ||
+      file === 'ApplicationCommand.js'
+    ) {
+      continue
+    }
 
-  const command = require(`./${file}`).default
+    const command = await import(`./${file}`)
 
-  commandsMetadata.push(command.meta)
-  commandsLogic[command.meta.name] = command.execute
-  if (typeof command.onLoad === 'function') {
-    commandsOnLoad.push(command.onLoad)
+    commandsMetadata.push(command.meta)
+    commandsLogic[command.meta.name] = command.execute
+    if (typeof command.onLoad === 'function') {
+      commandsOnLoad.push(command.onLoad)
+    }
   }
 }
+
+loadCommandsFromFiles().catch(log.error)
 
 /** All application commands. */
 export default {
@@ -51,7 +57,7 @@ export default {
   handle: async (interaction: discord.CommandInteraction) => {
     const command = commandsLogic[interaction.commandName]
 
-    if (!command) return
+    if (typeof command === 'undefined') return
 
     try {
       await command(interaction)

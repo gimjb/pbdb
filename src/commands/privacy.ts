@@ -4,7 +4,7 @@ import type ApplicationCommand from './ApplicationCommand'
 import config from '../config'
 import toDiscordMarkdown from '../utils/toDiscordMarkdown'
 
-function processPrivacyPolicy(privacy: string) {
+function processPrivacyPolicy (privacy: string): string {
   return (
     toDiscordMarkdown(privacy).trim() +
     // Add a link to the changelog in the Git repository.

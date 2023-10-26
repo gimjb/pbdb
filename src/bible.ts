@@ -1,40 +1,39 @@
 import bibleApi from '@bible-api/bible-api'
 import discord from 'discord.js'
-import CooldownCache from './CooldownCache'
+import cooldownCache from './cooldownCache'
 import config from './config'
 import log from './utils/log'
 import usersController from './controllers/users'
 
-function superscript(number: number) {
-  const superscriptMap = {
-    '0': '⁰',
-    '1': '¹',
-    '2': '²',
-    '3': '³',
-    '4': '⁴',
-    '5': '⁵',
-    '6': '⁶',
-    '7': '⁷',
-    '8': '⁸',
-    '9': '⁹'
-  }
+function superscript (number: number): string {
+  const superscriptMap = ['⁰', '¹', '²', '³', '⁴', '⁵', '⁶', '⁷', '⁸', '⁹']
 
   return number
     .toString()
     .split('')
-    .map(digit => superscriptMap[digit as keyof typeof superscriptMap])
+    .map(
+      digit => superscriptMap[parseInt(digit) as keyof typeof superscriptMap]
+    )
     .join('')
 }
 
-async function createMessageOptions(
+async function createMessageOptions (
   message: discord.Message,
   passage: any
-): Promise<void | discord.BaseMessageOptions> {
+): Promise<undefined | discord.BaseMessageOptions> {
   const { verseDisplay, inlineVerses, curlyQuotes } = (
     await usersController.get(message.author.id)
   ).preferences
 
-  const passageName = passage.name.replace(/\(PCE\)/, '(KJV1900)')
+  if (
+    typeof verseDisplay !== 'string' ||
+    typeof inlineVerses !== 'boolean' ||
+    typeof curlyQuotes !== 'boolean'
+  ) {
+    return
+  }
+
+  const passageName = passage.name.replace(/\(PCE\)/, '(KJV1900)') as string
 
   let concatenatedPassage =
     verseDisplay === 'embed' ? '' : `> ### ${passageName}\n> `
@@ -44,13 +43,16 @@ async function createMessageOptions(
     let toAdd = ''
     if (verse.chapterNumber !== currentChapterNumber) {
       currentChapterNumber = verse.chapterNumber
-      toAdd += '\n### Chapter ' + verse.chapterNumber + '\n'
+      toAdd +=
+        '\n### Chapter ' + (verse.chapterNumber.toString() as string) + '\n'
     }
 
     if (inlineVerses) {
-      toAdd += `${superscript(verse.verseNumber)} ${verse.markdown} `
+      toAdd += `${superscript(verse.verseNumber)} ${verse.markdown as string} `
     } else {
-      toAdd += `${verse.verseNumber}. ${verse.markdown}\n`
+      toAdd += `${verse.verseNumber.toString() as string}. ${
+        verse.markdown as string
+      }\n`
     }
 
     toAdd = curlyQuotes ? toAdd.replace(/'/g, '’') : toAdd
@@ -91,20 +93,20 @@ async function createMessageOptions(
   }
 }
 
-async function postPassage(
+async function postPassage (
   message: discord.Message,
   passageName: string,
   messageOptions: discord.BaseMessageOptions
-) {
+): Promise<void> {
   if (message.author.id === message.channel.client.user.id) {
     await message.edit(messageOptions)
     return
   }
 
-  message.channel.send(messageOptions)
+  await message.channel.send(messageOptions)
 
-  if (message.guildId) {
-    CooldownCache.cooldownPassage(
+  if (typeof message.guildId === 'string') {
+    cooldownCache.cooldownPassage(
       message.guildId,
       message.channelId,
       passageName
@@ -112,9 +114,10 @@ async function postPassage(
   }
 }
 
-export default async function messageHandler(message: discord.Message) {
+export default async function messageHandler (
+  message: discord.Message
+): Promise<void> {
   if (message.author.bot) return
-  message.channel
 
   const passagesOptions = bibleApi.parse({
     text: message.content.replace(
@@ -134,8 +137,8 @@ export default async function messageHandler(message: discord.Message) {
     })
 
     if (
-      message.guildId &&
-      CooldownCache.isPassageOnCooldown(
+      typeof message.guildId === 'string' &&
+      cooldownCache.isPassageOnCooldown(
         message.guildId,
         message.channelId,
         passage.name
@@ -147,7 +150,7 @@ export default async function messageHandler(message: discord.Message) {
 
     const messageOptions = await createMessageOptions(message, passage)
 
-    if (!messageOptions) continue
+    if (typeof messageOptions === 'undefined') continue
 
     if (
       getPassageOptions.start.verseNumber === 1 &&
@@ -156,7 +159,7 @@ export default async function messageHandler(message: discord.Message) {
       // This is a chapter-only reference: confirmation is required.
       const inquiry = await message.channel.send({
         content:
-          `Did you mean to post **${passage.name}**? ` +
+          `Did you mean to post **${passage.name as string}**? ` +
           'Confirmation is required for whole chapters.',
         components: [
           new discord.ActionRowBuilder<discord.ButtonBuilder>().addComponents(
@@ -174,12 +177,12 @@ export default async function messageHandler(message: discord.Message) {
 
       inquiry.awaitMessageComponent().then(async interaction => {
         if (interaction.customId === 'yes') {
-          postPassage(interaction.message, passage.name, messageOptions)
+          await postPassage(interaction.message, passage.name, messageOptions)
           return
         }
 
-        interaction.message.delete()
-      })
+        await interaction.message.delete()
+      }).catch(log.error)
 
       continue
     }
