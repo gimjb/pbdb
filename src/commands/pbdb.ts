@@ -47,9 +47,13 @@ const command: ApplicationCommand = {
       ephemeral: true
     })
   },
-  onLoad: async commands => {
+  onLoad: commands => {
     for (const command of commands) {
-      helpEmbed.fields![2]!.value += `\n- \`/${command.name}\`: ${command.description}`
+      const thirdField = helpEmbed.fields?.[2]
+
+      if (typeof thirdField === 'undefined') continue
+
+      thirdField.value += `\n- \`/${command.name}\`: ${command.description}`
     }
   }
 }

@@ -1,8 +1,9 @@
 import discord from 'discord.js'
 import type ApplicationCommand from './ApplicationCommand'
+import log from '../utils/log'
 import usersController from '../controllers/users'
 
-async function createInteractionReply(userId: string) {
+async function createInteractionReply (userId: string): Promise<discord.InteractionReplyOptions | discord.InteractionUpdateOptions> {
   const user = await usersController.get(userId)
 
   return {
@@ -25,10 +26,10 @@ async function createInteractionReply(userId: string) {
         new discord.ButtonBuilder()
           .setCustomId('inlineVerses')
           .setLabel(
-            `Inline Verses: ${user.preferences.inlineVerses ? 'On' : 'Off'}`
+            `Inline Verses: ${user.preferences.inlineVerses as boolean ? 'On' : 'Off'}`
           )
           .setStyle(
-            user.preferences.inlineVerses
+            user.preferences.inlineVerses as boolean
               ? discord.ButtonStyle.Success
               : discord.ButtonStyle.Danger
           ),
@@ -36,11 +37,11 @@ async function createInteractionReply(userId: string) {
           .setCustomId('curlyQuotes')
           .setLabel(
             `Quotation Marks: ${
-              user.preferences.curlyQuotes ? '“Curly”' : '"Straight"'
+              user.preferences.curlyQuotes as boolean ? '“Curly”' : '"Straight"'
             }`
           )
           .setStyle(
-            user.preferences.curlyQuotes
+            user.preferences.curlyQuotes as boolean
               ? discord.ButtonStyle.Primary
               : discord.ButtonStyle.Secondary
           )
@@ -49,10 +50,10 @@ async function createInteractionReply(userId: string) {
   }
 }
 
-async function awaitMessageComponent(
+async function awaitMessageComponent (
   userId: string,
   response: discord.InteractionResponse
-) {
+): Promise<void> {
   const user = await usersController.get(userId)
 
   await response
@@ -69,18 +70,18 @@ async function awaitMessageComponent(
           user.preferences.verseDisplay = 'embed'
         }
       } else if (i.customId === 'inlineVerses') {
-        user.preferences.inlineVerses = !user.preferences.inlineVerses
+        user.preferences.inlineVerses = !(user.preferences.inlineVerses as boolean)
       } else if (i.customId === 'curlyQuotes') {
-        user.preferences.curlyQuotes = !user.preferences.curlyQuotes
+        user.preferences.curlyQuotes = !(user.preferences.curlyQuotes as boolean)
       }
 
       await user.save()
 
-      awaitMessageComponent(
+      await awaitMessageComponent(
         user.id,
-        await i.update(await createInteractionReply(user.id))
+        await i.update(await createInteractionReply(user.id) as discord.InteractionUpdateOptions)
       )
-    })
+    }).catch(log.error)
 }
 
 const command: ApplicationCommand = {
@@ -91,10 +92,10 @@ const command: ApplicationCommand = {
   },
   execute: async interaction => {
     const response = await interaction.reply(
-      await createInteractionReply(interaction.user.id)
+      await createInteractionReply(interaction.user.id) as discord.InteractionReplyOptions
     )
 
-    awaitMessageComponent(interaction.user.id, response)
+    await awaitMessageComponent(interaction.user.id, response)
   }
 }
 

@@ -1,6 +1,10 @@
-const { default: log, padding } = require('./log')
+import { describe, expect, it } from '@jest/globals'
+import log from './log'
 
 const datePattern = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z/.source
+// 34 is the total length of the date pattern, longest log type, parentheses,
+// colon, and spaces: `'yyyy-mm-ddThh:mm:ss.mmmZ (ERROR): '.length === 34`.
+const paddingPattern = / {34}/.source
 
 /**
  * Test a log method.
@@ -8,54 +12,54 @@ const datePattern = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z/.source
  * @param {string} methodName
  * @returns {void}
  */
-function testLogMethod(methodName) {
+function testLogMethod (methodName: 'info' | 'warn' | 'error'): void {
   describe(`log.${methodName}`, () => {
-    const method = log[methodName]
+    const logMethod = log[methodName]
     const patternPrefix = `^${datePattern} \\(${methodName.toUpperCase()}\\): {1,2}`
 
     it('should log a string', async () => {
-      const output = await log[methodName]('a string with\na new line', true)
+      const output = await logMethod('a string with\na new line', true)
       expect(output).toMatch(
-        new RegExp(patternPrefix + `a string with\n${padding}a new line$`)
+        new RegExp(patternPrefix + `a string with\n${paddingPattern}a new line$`)
       )
     })
 
     it('should log an object', async () => {
-      const output = await log[methodName]({ a: 'b' }, true)
+      const output = await logMethod({ a: 'b' }, true)
       expect(output).toMatch(
         new RegExp(
-          patternPrefix + `\\{\\n${padding}  "a": "b"\\n${padding}\\}$`
+          patternPrefix + `\\{\\n${paddingPattern}  "a": "b"\\n${paddingPattern}\\}$`
         )
       )
     })
 
     it('should log an array', async () => {
-      const output = await log[methodName](['a', 'b'], true)
+      const output = await logMethod(['a', 'b'], true)
       expect(output).toMatch(
         new RegExp(
           patternPrefix +
-            `\\[\\n${padding}  "a",\\n${padding}  "b"\\n${padding}\\]$`
+            `\\[\\n${paddingPattern}  "a",\\n${paddingPattern}  "b"\\n${paddingPattern}\\]$`
         )
       )
     })
 
     it('should log a number', async () => {
-      const output = await log[methodName](1, true)
+      const output = await logMethod(1, true)
       expect(output).toMatch(new RegExp(patternPrefix + '1$'))
     })
 
     it('should log a boolean', async () => {
-      const output = await log[methodName](true, true)
+      const output = await logMethod(true, true)
       expect(output).toMatch(new RegExp(patternPrefix + 'true$'))
     })
 
     it('should log a null', async () => {
-      const output = await log[methodName](null, true)
+      const output = await logMethod(null, true)
       expect(output).toMatch(new RegExp(patternPrefix + 'null$'))
     })
 
     it('should log an undefined', async () => {
-      const output = await log[methodName](undefined, true)
+      const output = await logMethod(undefined, true)
       expect(output).toMatch(new RegExp(patternPrefix + 'undefined$'))
     })
   })
