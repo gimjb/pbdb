@@ -12,22 +12,25 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Check for package.json changes
-        id: package-json-changes
-        shell: bash
-        run: git diff --name-only ${{github.event.before}} ${{github.after}} | grep package.json
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
 
-      - name: Create version tag
-        if: steps.package-json-changes.outputs.result == 'package.json'
+      - name: Set Git tag based on package.json version
         shell: bash
         run: |
-          TAG_NAME=v$(node -p "require('./package.json').version")
-          if git rev-parse --verify --quiet $TAG_NAME; then
-            echo "Tag $TAG_NAME already exists"
-          else
-            git tag $TAG_NAME
-            if [[ ! $TAG_NAME =~ '-' ]]; then
-              git tag latest -f
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          TAG_NAME="v$PACKAGE_VERSION"
+          
+          # Check if the tag does not exist already (otherwise, do nothing)
+          if [ -z "$(git tag -l "$TAG_NAME")" ]; then
+            git tag "$TAG_NAME"
+
+            # Check if the version is not a pre-release
+            if [[ ! "$PACKAGE_VERSION" =~ "-" ]]; then
+              git tag "latest" -f
             fi
+            
             git push --tags -f
           fi

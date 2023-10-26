@@ -2,17 +2,17 @@ const github = require('@actions/github')
 
 async function run () {
   const token = process.env.GITHUB_TOKEN
-  const client = new github.GitHub(token)
+  const client = github.getOctokit(token)
 
-  const context = github.context
+  const payload = github.context.payload
 
-  if (context.payload.pull_request === null) {
+  if (payload.pull_request === null) {
     return
   }
 
-  const prNumber = context.payload.pull_request.number
-  const repo = context.payload.repository.name
-  const owner = context.payload.repository.owner.login
+  const prNumber = payload.pull_request.number
+  const repo = payload.repository.name
+  const owner = payload.repository.owner.login
   const body =
     'Thank you for your contribution! :tada: Someone will review your PR soon.'
 
