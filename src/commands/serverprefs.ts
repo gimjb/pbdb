@@ -36,8 +36,8 @@ const command: ApplicationCommand = {
         content:
           'The verse cooldown period in this server is currently ' +
           `**${CooldownCache.getCooldownValue(interaction.guildId)}** ` +
-          'seconds. To change it, use `/cooldown <seconds>`. Please note ' +
-          'that the “Manage Server” permission is required.',
+          'seconds. To change it, use `/serverprefs cooldown <seconds>`. ' +
+          'Please note that the “Manage Server” permission is required.',
         ephemeral: true
       })
     }
