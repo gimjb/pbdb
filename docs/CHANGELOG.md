@@ -343,7 +343,7 @@ Organize server preferences and user preferences into separate categories/comman
 - Bot goes online.
 
 [privacy policy]: https://github.com/gimjb/pbdb/blob/master/docs/privacy.md
-[unreleased]: https://github.com/gimjb/pbdb/compare/latest...HEAD
+[unreleased]: https://github.com/gimjb/pbdb/compare/latest...develop
 [0.20.0]: https://github.com/gimjb/pbdb/compare/v0.19.0...v0.20.0
 [0.19.0]: https://github.com/gimjb/pbdb/compare/v0.18.0...v0.19.0
 [0.18.0]: https://github.com/gimjb/pbdb/compare/v0.17.0...v0.18.0
