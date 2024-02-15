@@ -8,7 +8,7 @@ export async function create (data: IUser): Promise<any> {
 /** Get a user's preferences. */
 export async function get (id: string): Promise<any> {
   return await User.findOne({ id }).then(user => {
-    if (typeof user === 'object') return user
+    if (user !== null) return user
 
     return new User({ id })
   })
