@@ -1,5 +1,6 @@
 import fs from 'fs'
 import discord from 'discord.js'
+import type ApplicationCommand from './ApplicationCommand'
 import type {
   CommandLogic,
   CommandMetadata,
@@ -23,7 +24,8 @@ async function loadCommandsFromFiles (): Promise<void> {
       continue
     }
 
-    const command = await import(`./${file}`)
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const command = require(`./${file}`).default as ApplicationCommand
 
     commandsMetadata.push(command.meta)
     commandsLogic[command.meta.name] = command.execute
