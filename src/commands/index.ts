@@ -1,12 +1,12 @@
 import fs from 'fs'
 import discord from 'discord.js'
+import log from '@gimjb/log'
 import type ApplicationCommand from './ApplicationCommand'
 import type {
   CommandLogic,
   CommandMetadata,
   CommandOnLoad
 } from './ApplicationCommand'
-import log from '../utils/log'
 
 const commandsMetadata: CommandMetadata[] = []
 const commandsLogic: Record<string, CommandLogic> = {}

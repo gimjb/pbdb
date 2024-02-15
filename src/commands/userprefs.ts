@@ -1,6 +1,6 @@
 import discord from 'discord.js'
+import log from '@gimjb/log'
 import type ApplicationCommand from './ApplicationCommand'
-import log from '../utils/log'
 import usersController from '../controllers/users'
 
 async function createInteractionReply (userId: string): Promise<discord.InteractionReplyOptions | discord.InteractionUpdateOptions> {

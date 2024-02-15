@@ -1,5 +1,5 @@
+import log from '@gimjb/log'
 import guildsController from './controllers/guilds'
-import log from './utils/log'
 
 const guildsWithCooldowns: Map<string, number> = new Map()
 guildsController

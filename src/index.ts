@@ -1,10 +1,12 @@
+/* eslint-disable import/first */
 import discord from 'discord.js'
 import 'dotenv/config'
+import log from '@gimjb/log'
+log.path = 'log.txt'
 import mongoose from 'mongoose'
 import bible from './bible'
 import commands from './commands'
 import config from './config'
-import log from './utils/log'
 
 mongoose
   .connect(process.env['MONGO_URI'] ?? 'mongodb://localhost:27017/pbdb')
