@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [Unreleased]
+
+### Changed
+
+Organize server preferences and user preferences into separate categories/commands:
+
+- Rename “/cooldown” command to “/serverprefs cooldown” to make it clear that it
+  is a server preference.
+- Rename “/settings” command to “/userprefs” to make it clear that it is user
+  preferences.
+
 ## [0.20.0]: 2023-10-19
 
 ### Added
