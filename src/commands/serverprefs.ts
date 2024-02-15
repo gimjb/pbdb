@@ -1,19 +1,26 @@
 import { ApplicationCommandOptionType } from 'discord-api-types/v10'
 import type ApplicationCommand from './ApplicationCommand'
-import CooldownCache from '../cooldownCache'
+import CooldownCache from '../CooldownCache'
 
 const command: ApplicationCommand = {
   meta: {
-    name: 'cooldown',
-    description: 'Get or set the current verse cooldown in this server.',
+    name: 'serverprefs',
+    description: 'Get or set server preferences.',
     options: [
       {
-        name: 'seconds',
-        description: 'The new cooldown in seconds.',
-        type: ApplicationCommandOptionType.Integer,
-        required: false,
-        minValue: 0,
-        maxValue: 1800
+        name: 'cooldown',
+        description: 'Get or set the current verse cooldown duration in this server.',
+        type: ApplicationCommandOptionType.Subcommand,
+        options: [
+          {
+            name: 'seconds',
+            description: 'The new cooldown in seconds.',
+            type: ApplicationCommandOptionType.Integer,
+            required: false,
+            minValue: 0,
+            maxValue: 1800
+          }
+        ]
       }
     ]
   },

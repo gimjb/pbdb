@@ -86,7 +86,7 @@ async function awaitMessageComponent (
 
 const command: ApplicationCommand = {
   meta: {
-    name: 'settings',
+    name: 'userprefs',
     description: 'Configure the bot to your liking.',
     options: []
   },

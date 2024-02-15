@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [Unreleased]
+
+### Changed
+
+Organize server preferences and user preferences into separate categories/commands:
+
+- Rename “/cooldown” command to “/serverprefs cooldown” to make it clear that it
+  is a server preference.
+- Rename “/settings” command to “/userprefs” to make it clear that it is user
+  preferences.
+
 ## [0.20.0]: 2023-10-19
 
 ### Added
@@ -332,7 +343,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bot goes online.
 
 [privacy policy]: https://github.com/gimjb/pbdb/blob/master/docs/privacy.md
-[unreleased]: https://github.com/gimjb/pbdb/compare/latest...HEAD
+[unreleased]: https://github.com/gimjb/pbdb/compare/latest...develop
+[0.20.0]: https://github.com/gimjb/pbdb/compare/v0.19.0...v0.20.0
+[0.19.0]: https://github.com/gimjb/pbdb/compare/v0.18.0...v0.19.0
+[0.18.0]: https://github.com/gimjb/pbdb/compare/v0.17.0...v0.18.0
+[0.17.0]: https://github.com/gimjb/pbdb/compare/v0.16.0...v0.17.0
 [0.16.0]: https://github.com/gimjb/pbdb/compare/v0.15.0...v0.16.0
 [0.15.0]: https://github.com/gimjb/pbdb/compare/v0.14.1...v0.15.0
 [0.14.1]: https://github.com/gimjb/pbdb/compare/v0.14.0...v0.14.1
