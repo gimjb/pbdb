@@ -1,8 +1,8 @@
 import bibleApi from '@bible-api/bible-api'
 import discord from 'discord.js'
+import log from '@gimjb/log'
 import cooldownCache from './CooldownCache'
 import config from './config'
-import log from './utils/log'
 import usersController from './controllers/users'
 
 function superscript (number: number): string {
