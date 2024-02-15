@@ -344,6 +344,10 @@ Organize server preferences and user preferences into separate categories/comman
 
 [privacy policy]: https://github.com/gimjb/pbdb/blob/master/docs/privacy.md
 [unreleased]: https://github.com/gimjb/pbdb/compare/latest...HEAD
+[0.20.0]: https://github.com/gimjb/pbdb/compare/v0.19.0...v0.20.0
+[0.19.0]: https://github.com/gimjb/pbdb/compare/v0.18.0...v0.19.0
+[0.18.0]: https://github.com/gimjb/pbdb/compare/v0.17.0...v0.18.0
+[0.17.0]: https://github.com/gimjb/pbdb/compare/v0.16.0...v0.17.0
 [0.16.0]: https://github.com/gimjb/pbdb/compare/v0.15.0...v0.16.0
 [0.15.0]: https://github.com/gimjb/pbdb/compare/v0.14.1...v0.15.0
 [0.14.1]: https://github.com/gimjb/pbdb/compare/v0.14.0...v0.14.1
