@@ -4,7 +4,7 @@ import type ApplicationCommand from './ApplicationCommand'
 import config from '../config'
 import toDiscordMarkdown from '../utils/toDiscordMarkdown'
 
-function processTermsOfService(terms: string) {
+function processTermsOfService (terms: string): string {
   return (
     toDiscordMarkdown(terms).trim() +
     // Add a link to the changelog in the Git repository.

@@ -1,33 +1,31 @@
 import Guild, { IGuild } from '../models/Guild'
 
 /** Create a new guild. */
-export function create(data: IGuild) {
-  new Guild(data).save()
+export async function create (data: IGuild): Promise<void> {
+  await new Guild(data).save()
 }
 
 /** Get a guild's preferences. */
-export function get(guildId: string) {
-  return Guild.findOne({ guildId }).then(user => {
-    if (user) return user
+export async function get (guildId: string): Promise<any> {
+  const guild = await Guild.findOne({ guildId })
+  if (guild !== null) return guild
 
-    return new Guild({ guildId })
-  })
+  return new Guild({ guildId })
 }
 
-export function getAll() {
-  return Guild.find()
+export async function getAll (): Promise<any> {
+  return await Guild.find()
 }
 
 /** Update a guild's preferences. */
-export function update(data: IGuild) {
+export async function update (data: IGuild): Promise<void> {
   const { guildId } = data
 
-  Guild.findOne({ guildId }).then(user => {
-    if (!user) user = new Guild({ guildId })
+  let guild = await Guild.findOne({ guildId })
+  if (guild === null) guild = new Guild({ guildId })
 
-    user.preferences = data.preferences
-    user.save()
-  })
+  guild.preferences = data.preferences
+  await guild.save()
 }
 
 export default {

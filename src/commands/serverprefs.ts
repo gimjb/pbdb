@@ -1,25 +1,31 @@
-import discord, { Permissions } from 'discord.js'
 import { ApplicationCommandOptionType } from 'discord-api-types/v10'
 import type ApplicationCommand from './ApplicationCommand'
 import CooldownCache from '../CooldownCache'
 
 const command: ApplicationCommand = {
   meta: {
-    name: 'cooldown',
-    description: 'Get or set the current verse cooldown in this server.',
+    name: 'serverprefs',
+    description: 'Get or set server preferences.',
     options: [
       {
-        name: 'seconds',
-        description: 'The new cooldown in seconds.',
-        type: ApplicationCommandOptionType.Integer,
-        required: false,
-        minValue: 0,
-        maxValue: 1800
+        name: 'cooldown',
+        description: 'Get or set the current verse cooldown duration in this server.',
+        type: ApplicationCommandOptionType.Subcommand,
+        options: [
+          {
+            name: 'seconds',
+            description: 'The new cooldown in seconds.',
+            type: ApplicationCommandOptionType.Integer,
+            required: false,
+            minValue: 0,
+            maxValue: 1800
+          }
+        ]
       }
     ]
   },
   execute: async interaction => {
-    if (!interaction.guildId) return
+    if (interaction.guildId === null) return
 
     const updatedValue = interaction.options.get('seconds')?.value as
       | number
@@ -36,9 +42,7 @@ const command: ApplicationCommand = {
       })
     }
 
-    const { member } = interaction
-
-    if (!interaction.memberPermissions?.has('ManageGuild')) {
+    if (interaction.memberPermissions?.has('ManageGuild') !== true) {
       return await interaction.reply({
         content:
           'You must have the “Manage Server” permission to change the ' +
@@ -56,7 +60,7 @@ const command: ApplicationCommand = {
       })
     }
 
-    CooldownCache.setCooldownValue(interaction.guildId, updatedValue)
+    await CooldownCache.setCooldownValue(interaction.guildId, updatedValue)
 
     return await interaction.reply({
       content:

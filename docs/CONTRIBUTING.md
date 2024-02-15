@@ -70,9 +70,9 @@ If you would like to make a code change, please follow the below steps:
 #### Development Setup
 
 To set up your development environment, you will need to install
-[Node.js](https://nodejs.org/en/) and [Yarn](https://yarnpkg.com/). Once you
-have installed these, clone the repository and run `bash -f ./setup.sh` to
-install dependencies and set up the development environment.
+[Node.js](https://nodejs.org/en/). Once you have that, clone the repository and
+run `bash -f ./setup.sh` to install dependencies and set up the development
+environment.
 
 #### Branches
 

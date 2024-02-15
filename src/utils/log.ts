@@ -8,7 +8,7 @@ type LogType = 'info' | 'warn' | 'error'
  * @param message The message to pad.
  * @returns The padded message.
  */
-function padMessage(message: string) {
+function padMessage (message: string): string {
   return message.replace(/\n/g, '\n' + padding)
 }
 
@@ -19,7 +19,7 @@ function padMessage(message: string) {
  * @param dry Whether to actually log the message or only return the output.
  * @returns A promise that resolves when the message has been logged.
  */
-async function log(message: unknown, type: LogType, dry = false) {
+async function log (message: unknown, type: LogType, dry = false): Promise<string> {
   let output = new Date().toISOString()
 
   switch (typeof message) {
@@ -67,19 +67,19 @@ export default {
    * @param dry Whether to actually log the message or only return the output.
    * @returns A promise that resolves when the message has been logged.
    */
-  info: async (message: unknown, dry = false) => log(message, 'info', dry),
+  info: async (message: unknown, dry = false) => await log(message, 'info', dry),
   /**
    * Log a warning message.
    * @param message The message to log.
    * @param dry Whether to actually log the message or only return the output.
    * @returns A promise that resolves when the message has been logged.
    */
-  warn: async (message: unknown, dry = false) => log(message, 'warn', dry),
+  warn: async (message: unknown, dry = false) => await log(message, 'warn', dry),
   /**
    * Log an error message.
    * @param message The message to log.
    * @param dry Whether to actually log the message or only return the output.
    * @returns A promise that resolves when the message has been logged.
    */
-  error: async (message: unknown, dry = false) => log(message, 'error', dry)
+  error: async (message: unknown, dry = false) => await log(message, 'error', dry)
 }

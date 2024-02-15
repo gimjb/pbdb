@@ -1,6 +1,6 @@
 const github = require('@actions/github')
 
-async function run() {
+async function run () {
   const token = process.env.GITHUB_TOKEN
   const client = github.getOctokit(token)
 
