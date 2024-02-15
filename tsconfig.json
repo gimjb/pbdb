@@ -3,7 +3,7 @@
 {
   // Top Level
   "include": ["src/**/*.ts"],
-  "exclude": [],
+  "exclude": ["src/**/*.test.ts"],
   "compilerOptions": {
     // Type checking
     "exactOptionalPropertyTypes": true,
