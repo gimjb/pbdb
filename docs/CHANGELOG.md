@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.21.4]: 2024-02-15
+
+### Fixed
+
+- Corrected instructions in `/serverprefs cooldown` command.
+
 ## [0.21.3]: 2024-02-15
 
 ### Fixed
@@ -363,6 +369,7 @@ Organize server preferences and user preferences into separate categories/comman
 
 [privacy policy]: https://github.com/gimjb/pbdb/blob/master/docs/privacy.md
 [unreleased]: https://github.com/gimjb/pbdb/compare/latest...develop
+[0.21.4]: https://github.cmo/gimjb/pbdb/compare/v0.21.3...v0.21.4
 [0.21.3]: https://github.com/gimjb/pbdb/compare/v0.21.2...v0.21.3
 [0.21.2]: https://github.com/gimjb/pbdb/compare/v0.21.1...v0.21.2
 [0.21.1]: https://github.com/gimjb/pbdb/compare/v0.21.0...v0.21.1
