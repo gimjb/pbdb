@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [Unreleased]: 2024-03-08
+
+### Fixed
+
+- `/serverprefs cooldown 0` will now disable the verse cooldown (it previously set it to `180` seconds).
+
 ## [0.21.4]: 2024-02-15
 
 ### Fixed
