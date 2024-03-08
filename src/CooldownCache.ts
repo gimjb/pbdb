@@ -6,8 +6,6 @@ Guild
   .find()
   .then(guilds => {
     for (const guild of guilds) {
-      if (guild.preferences.cooldown === 0) continue
-
       guildsWithCooldowns.set(guild._id, guild.preferences.cooldown)
     }
   })
