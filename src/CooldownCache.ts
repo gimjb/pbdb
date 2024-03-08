@@ -1,14 +1,14 @@
 import log from '@gimjb/log'
-import guildsController from './controllers/guilds'
+import Guild from './models/Guild'
 
 const guildsWithCooldowns: Map<string, number> = new Map()
-guildsController
-  .getAll()
+Guild
+  .find()
   .then(guilds => {
     for (const guild of guilds) {
       if (guild.preferences.cooldown === 0) continue
 
-      guildsWithCooldowns.set(guild.guildId, guild.preferences.cooldown)
+      guildsWithCooldowns.set(guild._id, guild.preferences.cooldown)
     }
   })
   .catch(log.error)
@@ -62,7 +62,7 @@ const cooldownCache = {
 
   setCooldownValue: async (guildId: string, cooldown: number): Promise<void> => {
     guildsWithCooldowns.set(guildId, cooldown)
-    await guildsController.update({ guildId, preferences: { cooldown } })
+    await Guild.configure(guildId, { cooldown })
     updateAllCooldowns(guildId)
   },
 

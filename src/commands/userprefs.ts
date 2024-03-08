@@ -1,10 +1,10 @@
 import discord from 'discord.js'
 import log from '@gimjb/log'
 import type ApplicationCommand from './ApplicationCommand'
-import usersController from '../controllers/users'
+import User from '../models/User'
 
 async function createInteractionReply (userId: string): Promise<discord.InteractionReplyOptions | discord.InteractionUpdateOptions> {
-  const user = await usersController.get(userId)
+  const user = await User.get(userId)
 
   return {
     content: 'Configure the bot with the options below.',
@@ -54,7 +54,7 @@ async function awaitMessageComponent (
   userId: string,
   response: discord.InteractionResponse
 ): Promise<void> {
-  const user = await usersController.get(userId)
+  const user = await User.get(userId)
 
   await response
 
