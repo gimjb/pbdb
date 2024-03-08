@@ -1,7 +1,7 @@
 import bibleApi from '@bible-api/bible-api'
 import discord from 'discord.js'
 import log from '@gimjb/log'
-import cooldownCache from './CooldownCache'
+import cooldownCache from './cooldownCache'
 import config from './config'
 import User from './models/User'
 

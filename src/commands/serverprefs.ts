@@ -1,6 +1,6 @@
 import { ApplicationCommandOptionType } from 'discord-api-types/v10'
 import type ApplicationCommand from './ApplicationCommand'
-import CooldownCache from '../CooldownCache'
+import cooldownCache from '../cooldownCache'
 
 const command: ApplicationCommand = {
   meta: {
@@ -35,7 +35,7 @@ const command: ApplicationCommand = {
       return await interaction.reply({
         content:
           'The verse cooldown period in this server is currently ' +
-          `**${CooldownCache.getCooldownValue(interaction.guildId)}** ` +
+          `**${cooldownCache.getCooldownValue(interaction.guildId)}** ` +
           'seconds. To change it, use `/serverprefs cooldown <seconds>`. ' +
           'Please note that the “Manage Server” permission is required.',
         ephemeral: true
@@ -60,7 +60,7 @@ const command: ApplicationCommand = {
       })
     }
 
-    await CooldownCache.setCooldownValue(interaction.guildId, updatedValue)
+    await cooldownCache.setCooldownValue(interaction.guildId, updatedValue)
 
     return await interaction.reply({
       content:
