@@ -15,6 +15,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.21.4]: 2024-02-15
 
+### Added
+
+- Added `/legal` command to show legal information.
+
+### Removed
+
+- Removed the `/terms` command in favor of the `/legal` command to avoid confusion with the `/term` command.
+- Removed the `/privacy` command in favor of the `/legal` command.
+
 ### Fixed
 
 - Corrected instructions in `/serverprefs cooldown` command.
