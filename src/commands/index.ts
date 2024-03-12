@@ -4,11 +4,10 @@ import log from '@gimjb/log'
 import type ApplicationCommand from './ApplicationCommand'
 import type {
   CommandLogic,
-  CommandMetadata,
   CommandOnLoad
 } from './ApplicationCommand'
 
-const commandsMetadata: CommandMetadata[] = []
+const commandsMetadata: discord.ChatInputApplicationCommandData[] = []
 const commandsLogic: Record<string, CommandLogic> = {}
 const commandsOnLoad: CommandOnLoad[] = []
 
@@ -17,7 +16,8 @@ const files = fs.readdirSync(__dirname)
 async function loadCommandsFromFiles (): Promise<void> {
   for (const file of files) {
     if (
-      !file.endsWith('.js') ||
+      file.endsWith('.ts') ||
+      file.endsWith('.map') ||
       file === 'index.js' ||
       file === 'ApplicationCommand.js'
     ) {
@@ -52,11 +52,11 @@ export default {
     })
 
     for (const onLoad of commandsOnLoad) {
-      onLoad(commandsMetadata)
+      void onLoad(commandsMetadata)
     }
   },
   /** Handle any command interaction. */
-  handle: async (interaction: discord.CommandInteraction) => {
+  handle: async (interaction: discord.ChatInputCommandInteraction) => {
     const command = commandsLogic[interaction.commandName]
 
     if (typeof command === 'undefined') return

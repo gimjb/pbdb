@@ -84,7 +84,7 @@ client.on('shardResume', async (replayed, shardId) => {
 })
 
 client.on('interactionCreate', async interaction => {
-  if (!interaction.isCommand()) return
+  if (!interaction.isChatInputCommand()) return
 
   await commands.handle(interaction)
 })
