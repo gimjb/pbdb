@@ -13,8 +13,9 @@ const command: ApplicationCommand = {
         {
           title: 'Legal Information',
           description:
-            `By using this bot, you accept PBDB’s [Terms of Service](${config.officialRepository}/blob/master/docs/terms.md) ` +
-            `and [Privacy Policy](${config.officialRepository}/blob/master/docs/privacy.md).`,
+            'By using this bot, you accept PBDB’s ' +
+            '[Terms of Service](https://pbdb.io/terms) and ' +
+            '[Privacy Policy](https://pbdb.io/privacy).',
           color: config.nonJesusColor
         }
       ],
