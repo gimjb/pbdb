@@ -5,24 +5,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
----
+## [Unreleased]
 
-## [Unreleased]: 2024-03-08
+## [0.22.0]: 2024-03-22
+
+### Added
+
+- Added `/legal` command to show legal information.
+- Added `/term <term>` command to show the definition of a theological term:
+  - `/term term:TULIP`;
+  - `/term term:Total Depravity`;
+  - `/term term:Unconditional Election`;
+  - `/term term:Limited Atonement`;
+  - `/term term:Irresistible Grace`;
+  - `/term term:Preservation of the Saints`.
+
+### Removed
+
+- Removed the `/terms` command in favor of the `/legal` command to avoid confusion with the `/term` command.
+- Removed the `/privacy` command in favor of the `/legal` command.
+
+## 0.21.5: 2024-03-08
 
 ### Fixed
 
 - `/serverprefs cooldown 0` will now disable the verse cooldown (it previously set it to `180` seconds).
 
 ## [0.21.4]: 2024-02-15
-
-### Added
-
-- Added `/legal` command to show legal information.
-
-### Removed
-
-- Removed the `/terms` command in favor of the `/legal` command to avoid confusion with the `/term` command.
-- Removed the `/privacy` command in favor of the `/legal` command.
 
 ### Fixed
 
@@ -384,7 +393,8 @@ Organize server preferences and user preferences into separate categories/comman
 
 [privacy policy]: https://github.com/gimjb/pbdb/blob/master/docs/privacy.md
 [unreleased]: https://github.com/gimjb/pbdb/compare/latest...develop
-[0.21.4]: https://github.cmo/gimjb/pbdb/compare/v0.21.3...v0.21.4
+[0.22.0]: https://github.com/gimjb/pbdb/compare/v0.21.4...v0.22.0
+[0.21.4]: https://github.com/gimjb/pbdb/compare/v0.21.3...v0.21.4
 [0.21.3]: https://github.com/gimjb/pbdb/compare/v0.21.2...v0.21.3
 [0.21.2]: https://github.com/gimjb/pbdb/compare/v0.21.1...v0.21.2
 [0.21.1]: https://github.com/gimjb/pbdb/compare/v0.21.0...v0.21.1
