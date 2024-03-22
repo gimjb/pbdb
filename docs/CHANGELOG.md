@@ -7,10 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.23.1]: 2024-03-22
+
+### Fixed
+
+- Slightly changed the wording in the [`/term term:Regeneration`] as requested by Nia.
+
 ## [0.23.0]: 2024-03-22
 
-- Added [`/term term:Regeneration`](https://github.com/gimjb/pbdb/blob/v0.23.0/src/commands/term/regeneration.md) —
-  thank Nia for this [contribution](https://pbdb.io/definitions/65fd8d7291464ab267d3250b)!
+### Added
+
+- Added [`/term term:Regeneration`] — thank Nia for this
+  [contribution](https://pbdb.io/definitions/65fd8d7291464ab267d3250b)!
 
 ## [0.22.1]: 2024-03-22
 
@@ -402,6 +410,8 @@ Organize server preferences and user preferences into separate categories/comman
 ### Added
 
 - Bot goes online.
+
+[`/term term:Regeneration`]: https://github.com/gimjb/pbdb/blob/v0.23.0/src/commands/term/regeneration.md
 
 [privacy policy]: https://github.com/gimjb/pbdb/blob/master/docs/privacy.md
 [unreleased]: https://github.com/gimjb/pbdb/compare/latest...develop
