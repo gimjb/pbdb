@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.22.1]: 2024-03-22
+
+## Fixed
+
+- Updated import to `src/CooldownCache` in [`src/bible.ts`](https://github.com/gimjb/pbdb/blob/v0.22.1/src/bible.ts#L4)
+  and [`src/commands/serverprefs.ts`](https://github.com/gimjb/pbdb/blob/v0.22.1/src/commands/serverprefs.ts#L3).
+
 ## [0.22.0]: 2024-03-22
 
 ### Added
@@ -393,6 +400,7 @@ Organize server preferences and user preferences into separate categories/comman
 
 [privacy policy]: https://github.com/gimjb/pbdb/blob/master/docs/privacy.md
 [unreleased]: https://github.com/gimjb/pbdb/compare/latest...develop
+[0.22.1]: https://github.com/gimjb/pbdb/compare/v0.22.0...v0.22.1
 [0.22.0]: https://github.com/gimjb/pbdb/compare/v0.21.4...v0.22.0
 [0.21.4]: https://github.com/gimjb/pbdb/compare/v0.21.3...v0.21.4
 [0.21.3]: https://github.com/gimjb/pbdb/compare/v0.21.2...v0.21.3
