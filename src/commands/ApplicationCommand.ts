@@ -1,22 +1,15 @@
-import type { ApplicationCommandOption, CommandInteraction } from 'discord.js'
-
-/** Metadata of an application command. */
-export interface CommandMetadata {
-  name: string
-  description: string
-  options: ApplicationCommandOption[]
-}
+import type discord from 'discord.js'
 
 /** A function to represent the logic of an application command. */
-export type CommandLogic = (interaction: CommandInteraction) => Promise<any>
+export type CommandLogic = (interaction: discord.ChatInputCommandInteraction) => Promise<any>
 
 /** A function to be called once all commands have been registered. */
-export type CommandOnLoad = (commands: CommandMetadata[]) => void
+export type CommandOnLoad = (client: discord.ChatInputApplicationCommandData[]) => void
 
 /** An application command. */
 export default interface ApplicationCommand {
   /** The metadata of the application command. */
-  meta: CommandMetadata
+  meta: discord.ChatInputApplicationCommandData
   /** The logic of the application command. */
   execute: CommandLogic
   /** A function to be called once all commands have been registered. */
