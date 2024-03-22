@@ -1,8 +1,8 @@
 import mongoose from 'mongoose'
 
-export interface IUser {
+export interface UserDoc {
   /** The user's Discord ID. */
-  id: string
+  _id: string
   /** The user's preferences. */
   preferences: {
     /** The user's preferred verse display form. */
@@ -14,8 +14,13 @@ export interface IUser {
   }
 }
 
-const userSchema = new mongoose.Schema<IUser>({
-  id: { type: String, required: true },
+export interface UserModel extends mongoose.Model<UserDoc> {
+  get: (_id: string) => Promise<mongoose.HydratedDocument<UserDoc>>
+  configure: (_id: string, preferences: UserDoc['preferences']) => Promise<mongoose.HydratedDocument<UserDoc>>
+}
+
+const userSchema = new mongoose.Schema<UserDoc, UserModel>({
+  _id: { type: String, required: true },
   preferences: {
     verseDisplay: {
       type: String,
@@ -33,5 +38,13 @@ const userSchema = new mongoose.Schema<IUser>({
   }
 })
 
+userSchema.static('get', async function (_id: string) {
+  return (await this.findById(_id)) ?? new this({ _id })
+})
+
+userSchema.static('configure', async function (_id: string, preferences: UserDoc['preferences']) {
+  return await this.findByIdAndUpdate(_id, { preferences }, { new: true, setDefaultsOnInsert: true, upsert: true })
+})
+
 /** A Discord user and their preferences. */
-export default mongoose.model('User', userSchema)
+export default mongoose.model<UserDoc, UserModel>('User', userSchema)

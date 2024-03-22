@@ -1,9 +1,9 @@
 import bibleApi from '@bible-api/bible-api'
 import discord from 'discord.js'
 import log from '@gimjb/log'
-import cooldownCache from './CooldownCache'
+import cooldownCache from './cooldownCache'
 import config from './config'
-import usersController from './controllers/users'
+import User from './models/User'
 
 function superscript (number: number): string {
   const superscriptMap = ['⁰', '¹', '²', '³', '⁴', '⁵', '⁶', '⁷', '⁸', '⁹']
@@ -22,7 +22,7 @@ async function createMessageOptions (
   passage: any
 ): Promise<undefined | discord.BaseMessageOptions> {
   const { verseDisplay, inlineVerses, curlyQuotes } = (
-    await usersController.get(message.author.id)
+    await User.get(message.author.id)
   ).preferences
 
   if (
