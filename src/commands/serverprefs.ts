@@ -1,6 +1,6 @@
 import { ApplicationCommandOptionType } from 'discord-api-types/v10'
 import type ApplicationCommand from './ApplicationCommand'
-import cooldownCache from '../cooldownCache'
+import cooldownCache from '../CooldownCache'
 
 const command: ApplicationCommand = {
   meta: {
