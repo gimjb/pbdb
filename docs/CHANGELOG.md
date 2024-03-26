@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.24.0]: 2024-03-25
+
+### Added
+
+- Added [`/term term:Elect`] — thank Nia for this 
+  [contribution](https://pbdb.io/definitions/65fd8d7291464ab267d3250b)!
+
 ### Thanks
 
 A special thank you to [Jennifer Chen](https://www.facebook.com/jen.chen.507) for the $200 donation to the project.
@@ -415,10 +422,12 @@ Organize server preferences and user preferences into separate categories/comman
 
 - Bot goes online.
 
+[`/term term:Elect`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/elect.md
 [`/term term:Regeneration`]: https://github.com/gimjb/pbdb/blob/v0.23.0/src/commands/term/regeneration.md
 
 [privacy policy]: https://github.com/gimjb/pbdb/blob/master/docs/privacy.md
 [unreleased]: https://github.com/gimjb/pbdb/compare/latest...develop
+[0.24.0]: https://github.com/gimjb/pbdb/compare/v0.23.1...v0.24.0
 [0.23.1]: https://github.com/gimjb/pbdb/compare/v0.23.0...v0.23.1
 [0.23.0]: https://github.com/gimjb/pbdb/compare/v0.22.1...v0.23.0
 [0.22.1]: https://github.com/gimjb/pbdb/compare/v0.22.0...v0.22.1
