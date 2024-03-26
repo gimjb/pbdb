@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.25.0]: 2024-03-26
+
+### Added
+
+- Added [`/term term:Justification`] by Nia (submitted through 
+  [Discord](https://discord.com/channels/1095917002842984468/1193062655162859600/1222183962567249950)).
+
 ## [0.24.0]: 2024-03-26
 
 ### Added
@@ -444,6 +451,7 @@ Organize server preferences and user preferences into separate categories/comman
 
 - Bot goes online.
 
+[`/term term:Justification`]: https://github.com/gimjb/pbdb/blob/v0.25.0/src/commands/term/justification.md
 [`/term term:Elect`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/elect.md
 [`/term term:Conversion`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/conversion.md
 [`/term term:Eternal Salvation`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/eternal-salvation.md
@@ -460,6 +468,7 @@ Organize server preferences and user preferences into separate categories/comman
 
 [privacy policy]: https://github.com/gimjb/pbdb/blob/master/docs/privacy.md
 [unreleased]: https://github.com/gimjb/pbdb/compare/latest...develop
+[0.25.0]: https://github.com/gimjb/pbdb/compare/v0.24.0...v0.25.0
 [0.24.0]: https://github.com/gimjb/pbdb/compare/v0.23.1...v0.24.0
 [0.23.1]: https://github.com/gimjb/pbdb/compare/v0.23.0...v0.23.1
 [0.23.0]: https://github.com/gimjb/pbdb/compare/v0.22.1...v0.23.0
