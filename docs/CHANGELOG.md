@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   [contribution](https://pbdb.io/definitions/65fd8d7291464ab267d3250b)!
 - Added [`/term term:Conversion`] — thank Nia for this 
   [contribution](https://pbdb.io/definitions/65fd968191464ab267d3251a)!
+- Added [`/term term:Eternal Salvation`] — thank Nia for this 
+  [contribution](https://pbdb.io/definitions/65fda3b391464ab267d32530)!
 
 ### Thanks
 
@@ -426,6 +428,7 @@ Organize server preferences and user preferences into separate categories/comman
 
 [`/term term:Elect`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/elect.md
 [`/term term:Conversion`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/conversion.md
+[`/term term:Eternal Salvation`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/eternal-salvation.md
 [`/term term:Regeneration`]: https://github.com/gimjb/pbdb/blob/v0.23.0/src/commands/term/regeneration.md
 
 [privacy policy]: https://github.com/gimjb/pbdb/blob/master/docs/privacy.md
