@@ -12,6 +12,10 @@ used to reference Bible verses (KJV) and quickly look up theological terms.
 Contributions are welcome! Please read the [Code of Conduct](CODE_OF_CONDUCT.md)
 and [Contributing](CONTRIBUTING.md) documents before contributing.
 
+## Acknowledgements
+
+Special thanks to [Jennifer Chen](https://www.facebook.com/jen.chen.507) for the $200 donation to the project!!
+
 ## License
 
 This project is licensed under the MIT-0 License; see the

@@ -7,6 +7,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.24.0]: 2024-03-25
+
+### Added
+
+- Added [`/term term:Elect`] — thank Nia for this 
+  [contribution](https://pbdb.io/definitions/65fd8d7291464ab267d3250b)!
+- Added [`/term term:Conversion`] — thank Nia for this 
+  [contribution](https://pbdb.io/definitions/65fd968191464ab267d3251a)!
+- Added [`/term term:Eternal Salvation`] — thank Nia for this 
+  [contribution](https://pbdb.io/definitions/65fda3b391464ab267d32530)!
+- Added [`/term term:Eternal Life`] — thank Nia for this
+  [contribution](https://pbdb.io/definitions/65fda5de91464ab267d32534)!
+- Added [`/term term:Gospel`] — thank Nia for this 
+  [contribution](https://pbdb.io/definitions/65fda9c191464ab267d32539)!
+- Added [`/term term:Temporal Salvation`] — thank Nia for this 
+  [contribution](https://pbdb.io/definitions/6600772191464ab267d32552)!
+- Added [`/term term:Sovereign Grace`] — thank Nia for this 
+  [contribution](https://pbdb.io/definitions/660078ea91464ab267d32556)!
+- Added [`/term term:Grace`] — thank Nia for this
+  [contribution](https://pbdb.io/definitions/66007c2291464ab267d3255a)!
+- Added [`/term term:Election`] — thank Nia for this
+  [contribution](https://pbdb.io/definitions/66007ca091464ab267d3255e)!
+- Added [`/term term:Predestination`] — thank Nia for this
+  [contribution](https://pbdb.io/definitions/66007d2291464ab267d32562)!
+- Added [`/term term:Reprobation`] — thank Nia for this
+  [contribution](https://pbdb.io/definitions/66007e4591464ab267d32566)!
+- Added [`/term term:Quicken`] — thank Nia for this
+  [contribution](https://pbdb.io/definitions/66007f1291464ab267d3256a)!
+
+### Thanks
+
+A special thank you to [Jennifer Chen](https://www.facebook.com/jen.chen.507) for the $200 donation to the project.
+
 ## [0.23.1]: 2024-03-22
 
 ### Fixed
@@ -411,10 +444,23 @@ Organize server preferences and user preferences into separate categories/comman
 
 - Bot goes online.
 
+[`/term term:Elect`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/elect.md
+[`/term term:Conversion`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/conversion.md
+[`/term term:Eternal Salvation`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/eternal-salvation.md
+[`/term term:Eternal Life`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/eternal-life.md
+[`/term term:Gospel`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/gospel.md
+[`/term term:Temporal Salvation`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/temporal-salvation.md
+[`/term term:Sovereign Grace`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/sovereign-grace.md
+[`/term term:Grace]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/grace.md
+[`/term term:Election`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/election.md
+[`/term term:Predestination`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/predestination.md
+[`/term term:Reprobation`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/reprobation.md
+[`/term term:Quicken`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/quicken.md
 [`/term term:Regeneration`]: https://github.com/gimjb/pbdb/blob/v0.23.0/src/commands/term/regeneration.md
 
 [privacy policy]: https://github.com/gimjb/pbdb/blob/master/docs/privacy.md
 [unreleased]: https://github.com/gimjb/pbdb/compare/latest...develop
+[0.24.0]: https://github.com/gimjb/pbdb/compare/v0.23.1...v0.24.0
 [0.23.1]: https://github.com/gimjb/pbdb/compare/v0.23.0...v0.23.1
 [0.23.0]: https://github.com/gimjb/pbdb/compare/v0.22.1...v0.23.0
 [0.22.1]: https://github.com/gimjb/pbdb/compare/v0.22.0...v0.22.1
