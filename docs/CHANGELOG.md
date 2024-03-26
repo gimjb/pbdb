@@ -17,6 +17,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   [contribution](https://pbdb.io/definitions/65fd968191464ab267d3251a)!
 - Added [`/term term:Eternal Salvation`] — thank Nia for this 
   [contribution](https://pbdb.io/definitions/65fda3b391464ab267d32530)!
+- Added [`/term term:Eternal Life`] — thank Nia for this
+  [contribution](https://pbdb.io/definitions/65fda5de91464ab267d32534)!
 
 ### Thanks
 
