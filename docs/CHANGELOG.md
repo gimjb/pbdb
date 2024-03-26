@@ -23,6 +23,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   [contribution](https://pbdb.io/definitions/65fda9c191464ab267d32539)!
 - Added [`/term term:Temporal Salvation] — thank Nia for this 
   [contribution](https://pbdb.io/definitions/6600772191464ab267d32552)!
+- Added [`/term term:Sovereign Grace] — thank Nia for this 
+  [contribution](https://pbdb.io/definitions/660078ea91464ab267d32556)!
 
 ### Thanks
 
@@ -438,6 +440,7 @@ Organize server preferences and user preferences into separate categories/comman
 [`/term term:Eternal Life`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/eternal-life.md
 [`/term term:Gospel`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/gospel.md
 [`/term term:Temporal Salvation`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/temporal-salvation.md
+[`/term term:Sovereign Grace`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/sovereign-grace.md
 [`/term term:Regeneration`]: https://github.com/gimjb/pbdb/blob/v0.23.0/src/commands/term/regeneration.md
 
 [privacy policy]: https://github.com/gimjb/pbdb/blob/master/docs/privacy.md
