@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Thanks
+
+A special thank you to [Jennifer Chen](https://www.facebook.com/jen.chen.507) for the $200 donation to the project.
+
 ## [0.23.1]: 2024-03-22
 
 ### Fixed
