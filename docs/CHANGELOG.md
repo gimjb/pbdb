@@ -451,7 +451,7 @@ Organize server preferences and user preferences into separate categories/comman
 [`/term term:Gospel`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/gospel.md
 [`/term term:Temporal Salvation`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/temporal-salvation.md
 [`/term term:Sovereign Grace`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/sovereign-grace.md
-[`/term term:Grace]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/grace.md
+[`/term term:Grace`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/grace.md
 [`/term term:Election`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/election.md
 [`/term term:Predestination`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/predestination.md
 [`/term term:Reprobation`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/reprobation.md
