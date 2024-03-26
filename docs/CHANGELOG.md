@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.25.1]: 2024-03-26
+
+### Fixed
+
+- Fixed the [`/term term:Justification`][justification-2] definition by Nia (submitted through 
+  [Discord](https://discord.com/channels/1095917002842984468/1193062655162859600/1222200169546907700)).
+
 ## [0.25.0]: 2024-03-26
 
 ### Added
@@ -51,7 +58,7 @@ A special thank you to [Jennifer Chen](https://www.facebook.com/jen.chen.507) fo
 
 ### Fixed
 
-- Slightly changed the wording in the [`/term term:Regeneration`] as requested by Nia.
+- Slightly changed the wording in the [`/term term:Regeneration`][regeneration-2] as requested by Nia.
 
 ## [0.23.0]: 2024-03-22
 
@@ -451,6 +458,7 @@ Organize server preferences and user preferences into separate categories/comman
 
 - Bot goes online.
 
+[justification-2]: https://github.com/gimjb/pbdb/blob/v0.25.1/src/commands/term/justification.md
 [`/term term:Justification`]: https://github.com/gimjb/pbdb/blob/v0.25.0/src/commands/term/justification.md
 [`/term term:Elect`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/elect.md
 [`/term term:Conversion`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/conversion.md
@@ -464,6 +472,7 @@ Organize server preferences and user preferences into separate categories/comman
 [`/term term:Predestination`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/predestination.md
 [`/term term:Reprobation`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/reprobation.md
 [`/term term:Quicken`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/quicken.md
+[regeneration-2]: https://github.com/gimjb/pbdb/blob/v0.23.1/src/commands/term/regeneration.md
 [`/term term:Regeneration`]: https://github.com/gimjb/pbdb/blob/v0.23.0/src/commands/term/regeneration.md
 
 [privacy policy]: https://github.com/gimjb/pbdb/blob/master/docs/privacy.md
