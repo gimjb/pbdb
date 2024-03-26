@@ -33,6 +33,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   [contribution](https://pbdb.io/definitions/66007d2291464ab267d32562)!
 - Added [`/term term:Reprobation`] — thank Nia for this
   [contribution](https://pbdb.io/definitions/66007e4591464ab267d32566)!
+- Added [`/term term:Quicken`] — thank Nia for this
+  [contribution](https://pbdb.io/definitions/66007f1291464ab267d3256a)!
 
 ### Thanks
 
@@ -453,6 +455,7 @@ Organize server preferences and user preferences into separate categories/comman
 [`/term term:Election`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/election.md
 [`/term term:Predestination`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/predestination.md
 [`/term term:Reprobation`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/reprobation.md
+[`/term term:Quicken`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/quicken.md
 [`/term term:Regeneration`]: https://github.com/gimjb/pbdb/blob/v0.23.0/src/commands/term/regeneration.md
 
 [privacy policy]: https://github.com/gimjb/pbdb/blob/master/docs/privacy.md
