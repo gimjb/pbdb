@@ -29,6 +29,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   [contribution](https://pbdb.io/definitions/66007c2291464ab267d3255a)!
 - Added [`/term term:Election`] — thank Nia for this
   [contribution](https://pbdb.io/definitions/66007ca091464ab267d3255e)!
+- Added [`/term term:Predestination`] — thank Nia for this
+  [contribution](https://pbdb.io/definitions/66007d2291464ab267d32562)!
 
 ### Thanks
 
@@ -447,6 +449,7 @@ Organize server preferences and user preferences into separate categories/comman
 [`/term term:Sovereign Grace`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/sovereign-grace.md
 [`/term term:Grace]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/grace.md
 [`/term term:Election`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/election.md
+[`/term term:Predestination`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/predestination.md
 [`/term term:Regeneration`]: https://github.com/gimjb/pbdb/blob/v0.23.0/src/commands/term/regeneration.md
 
 [privacy policy]: https://github.com/gimjb/pbdb/blob/master/docs/privacy.md
