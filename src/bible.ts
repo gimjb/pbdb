@@ -3,7 +3,7 @@ import discord from 'discord.js'
 import log from '@gimjb/log'
 import cooldownCache from './CooldownCache'
 import config from './config'
-import User from './models/User'
+import User, { UserDoc } from './models/User'
 
 function superscript (number: number): string {
   const superscriptMap = ['⁰', '¹', '²', '³', '⁴', '⁵', '⁶', '⁷', '⁸', '⁹']
@@ -19,11 +19,10 @@ function superscript (number: number): string {
 
 async function createMessageOptions (
   message: discord.Message,
-  passage: any
+  passage: any,
+  user: UserDoc
 ): Promise<undefined | discord.BaseMessageOptions> {
-  const { verseDisplay, inlineVerses, curlyQuotes } = (
-    await User.get(message.author.id)
-  ).preferences
+  const { verseDisplay, inlineVerses, curlyQuotes } = user.preferences
 
   if (
     typeof verseDisplay !== 'string' ||
@@ -119,6 +118,9 @@ export default async function messageHandler (
 ): Promise<void> {
   if (message.author.bot) return
 
+  const user = await User.get(message.author.id)
+  if (user.banned) return
+
   const passagesOptions = bibleApi.parse({
     text: message.content.replace(
       /\[[^\]]+\]|```.+?```|`[^`\n\r]+`|__|\*/gs,
@@ -148,7 +150,7 @@ export default async function messageHandler (
       continue
     }
 
-    const messageOptions = await createMessageOptions(message, passage)
+    const messageOptions = await createMessageOptions(message, passage, user)
 
     if (typeof messageOptions === 'undefined') continue
 

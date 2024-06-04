@@ -3,6 +3,8 @@ import mongoose from 'mongoose'
 export interface UserDoc {
   /** The user's Discord ID. */
   _id: string
+  /** Whether or not the user is banned from posting Bible verses through the bot. */
+  banned: boolean
   /** The user's preferences. */
   preferences: {
     /** The user's preferred verse display form. */
@@ -21,6 +23,7 @@ export interface UserModel extends mongoose.Model<UserDoc> {
 
 const userSchema = new mongoose.Schema<UserDoc, UserModel>({
   _id: { type: String, required: true },
+  banned: { type: Boolean, default: false },
   preferences: {
     verseDisplay: {
       type: String,
