@@ -88,6 +88,8 @@ const command: ApplicationCommand = {
   meta: {
     name: 'userprefs',
     description: 'Configure the bot to your liking.',
+    contexts: [0, 1, 2],
+    integration_types: [0, 1],
     options: []
   },
   execute: async interaction => {

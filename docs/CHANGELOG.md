@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.27.0]: 2024-07-15
+
+This version makes PBDB user-installable.
+
+### Added
+
+- User-installable app.
+- [`/quote`] command to post scripture from the user-installed app.
+
 ## [0.26.0]: 2024-06-04
 
 ### Added
@@ -464,6 +473,7 @@ Organize server preferences and user preferences into separate categories/comman
 
 - Bot goes online.
 
+[`/quote`]: https://github.com/gimjb/pbdb/blob/v0.26.0/src/commands/quote.ts#L13-L61
 [justification-2]: https://github.com/gimjb/pbdb/blob/v0.25.1/src/commands/term/justification.md
 [`/term term:Justification`]: https://github.com/gimjb/pbdb/blob/v0.25.0/src/commands/term/justification.md
 [`/term term:Elect`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/elect.md
@@ -483,6 +493,7 @@ Organize server preferences and user preferences into separate categories/comman
 
 [privacy policy]: https://github.com/gimjb/pbdb/blob/master/docs/privacy.md
 [unreleased]: https://github.com/gimjb/pbdb/compare/latest...develop
+[0.27.0]: https://github.com/gimjb/pbdb/compare/v0.26.0...v0.27.0
 [0.26.0]: https://github.com/gimjb/pbdb/compare/v0.25.1...v0.26.0
 [0.25.1]: https://github.com/gimjb/pbdb/compare/v0.25.0...v0.25.1
 [0.25.0]: https://github.com/gimjb/pbdb/compare/v0.24.0...v0.25.0

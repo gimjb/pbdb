@@ -17,7 +17,7 @@ function superscript (number: number): string {
     .join('')
 }
 
-async function createMessageOptions (
+export async function createMessageOptions (
   passage: any,
   user: UserDoc
 ): Promise<undefined | discord.BaseMessageOptions> {

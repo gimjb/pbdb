@@ -27,6 +27,8 @@ const command: ApplicationCommand = {
   meta: {
     name: 'term',
     description: 'Look up a theological term.',
+    contexts: [0, 1, 2],
+    integration_types: [0, 1],
     options: [{
       name: 'term',
       description: 'The theological term to look up.',

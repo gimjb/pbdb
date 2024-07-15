@@ -49,7 +49,7 @@ export default {
 
     await rest.put(discord.Routes.applicationCommands(client.user.id), {
       body: commandsMetadata
-    })
+    }).then(console.info)
 
     for (const onLoad of commandsOnLoad) {
       void onLoad(commandsMetadata)
@@ -64,11 +64,13 @@ export default {
     try {
       await command(interaction)
     } catch (error) {
-      console.error(error)
+      void log.error(error)
+      if (interaction.replied) return
+
       await interaction.reply({
         content: ':x: Sorry, an unexpected error occurred. Please try again.',
         ephemeral: true
-      })
+      }).catch(log.error)
     }
   }
 } as const
