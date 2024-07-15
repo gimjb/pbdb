@@ -18,7 +18,6 @@ function superscript (number: number): string {
 }
 
 async function createMessageOptions (
-  message: discord.Message,
   passage: any,
   user: UserDoc
 ): Promise<undefined | discord.BaseMessageOptions> {
@@ -150,7 +149,7 @@ export default async function messageHandler (
       continue
     }
 
-    const messageOptions = await createMessageOptions(message, passage, user)
+    const messageOptions = await createMessageOptions(passage, user)
 
     if (typeof messageOptions === 'undefined') continue
 
