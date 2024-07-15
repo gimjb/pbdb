@@ -473,7 +473,7 @@ Organize server preferences and user preferences into separate categories/comman
 
 - Bot goes online.
 
-[`/quote`]: https://github.com/gimjb/pbdb/blob/v0.26.0/src/commands/quote.ts#L13-L61
+[`/quote`]: https://github.com/gimjb/pbdb/blob/v0.27.0/src/commands/quote.ts#L13-L61
 [justification-2]: https://github.com/gimjb/pbdb/blob/v0.25.1/src/commands/term/justification.md
 [`/term term:Justification`]: https://github.com/gimjb/pbdb/blob/v0.25.0/src/commands/term/justification.md
 [`/term term:Elect`]: https://github.com/gimjb/pbdb/blob/v0.24.0/src/commands/term/elect.md
